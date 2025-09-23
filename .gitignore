@@ -39,5 +39,14 @@ Carrental/Carrental/wwwroot/car1/
 Carrental/Carrental/wwwroot/car3/
 Carrental/Carrental/wwwroot/car4/
 
+# Ignore generic library folders; we'll add specific files as needed
+Carrental/Carrental/wwwroot/css/
+Carrental/Carrental/wwwroot/js/
+Carrental/Carrental/wwwroot/lib/
+Carrental/Carrental/wwwroot/images/
+Carrental/Carrental/wwwroot/img/
+Carrental/Carrental/wwwroot/Home/public/fonts/
+Carrental/Carrental/wwwroot/Home/public/millennium_falcon/
+
 # Windows alternate data streams copied from zip
 **:Zone.Identifier
