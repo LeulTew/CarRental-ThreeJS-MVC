@@ -55,14 +55,21 @@ Key paths for quick orientation:
 - Catalog & filters: `/Car`
 - Payment screen: `Views/Car/ProcessPayment.cshtml`
 
+Inline demo (HTML5 video):
+
+<video src="docs/assets/Carrentaldemo.mp4" controls playsinline width="900" poster="docs/assets/LandingPage.png">
+	Sorry, your browser doesn't support embedded videos. You can
+	<a href="docs/assets/Carrentaldemo.mp4">download the demo MP4</a> instead.
+  
+</video>
+
 Placeholders (add your screenshots in `docs/screens/` and update paths):
 - Landing: `docs/screens/landing.png`
 - Catalog: `docs/screens/catalog.png`
 - Details/Booking: `docs/screens/details.png`
 - Payment: `docs/screens/payment.png`
 
-Demo video (mp4 in repo):
-- `docs/assets/Carrentaldemo.mp4`
+Demo video (mp4 in repo): `docs/assets/Carrentaldemo.mp4`
 
 ## Features
 - Three.js landing page with GLTF loader and OrbitControls; responsive model scaling and arrow navigation
