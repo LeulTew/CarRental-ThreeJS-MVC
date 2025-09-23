@@ -11,7 +11,7 @@
 
 <img src="docs/assets/LandingPage.png" alt="Landing Page Screenshot" width="900" />
 
-[🎥 **View Interactive Demo Video**](https://leultew.github.io/CarRental-ThreeJS-MVC/) | [📖 **Live App**](https://localhost:7022/) | [🐛 **Report Issue**](https://github.com/LeulTew/CarRental-ThreeJS-MVC/issues)
+[📥 **Download Demo Video**](docs/assets/Carrentaldemo.mp4) | [📖 **Live App**](https://localhost:7022/) | [🐛 **Report Issue**](https://github.com/LeulTew/CarRental-ThreeJS-MVC/issues)
 
 </div>
 
@@ -66,9 +66,9 @@ Carrental/
 
 Dive into the action with our interactive demo and key app screens!
 
-### 🎥 Interactive Demo
-[🎬 **Watch Full Demo Video**](https://leultew.github.io/CarRental-ThreeJS-MVC/)  
-*Experience the Three.js landing, catalog browsing, booking flow, and payments in action!*
+### 🎥 Demo Video
+[📥 **Download & Play Demo Video**](docs/assets/Carrentaldemo.mp4)  
+*Download the MP4 file and play it locally to see the Three.js landing, catalog browsing, booking flow, and payments in action!*
 
 ### 📸 Key Screenshots
 
@@ -300,6 +300,22 @@ This project demonstrates enterprise-level skills:
 - **DevOps Ready**: CI/CD with GitHub Actions, migrations, container-friendly
 
 *Perfect for portfolios—showcases modern web dev from 3D graphics to secure payments!*
+
+---
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Here's how to get started:
+
+1. **Fork** the repository.
+2. **Create** a feature branch: `git checkout -b feature/your-feature`.
+3. **Commit** your changes: `git commit -m 'Add some feature'`.
+4. **Push** to the branch: `git push origin feature/your-feature`.
+5. **Open** a Pull Request.
+
+Please ensure your code follows the project's style and includes tests where applicable.
 
 ---
 
