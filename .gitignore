@@ -29,6 +29,15 @@ Thumbs.db
 # Large asset raw sources
 Cars/**
 !Cars/.gitattributes
+*.bacpac
+
+# Avoid redundant nested solution file
+Carrental/Carrental/Carrental.sln
+
+# Keep only one small 3D model folder for showcase
+Carrental/Carrental/wwwroot/car1/
+Carrental/Carrental/wwwroot/car3/
+Carrental/Carrental/wwwroot/car4/
 
 # Windows alternate data streams copied from zip
 **:Zone.Identifier
