@@ -1,190 +1,310 @@
 <div align="center">
 
-# CarRental 5.0 — ASP.NET Core MVC + Three.js
+# 🚗 CarRental 5.0 — ASP.NET Core MVC + Three.js
 
-Fast, full‑stack car rental platform with an interactive Three.js landing (no React), robust MVC backend, and PayPal sandbox payments.
+[![Build Status](https://github.com/LeulTew/CarRental-ThreeJS-MVC/actions/workflows/dotnet.yml/badge.svg)](https://github.com/LeulTew/CarRental-ThreeJS-MVC/actions)
+[![.NET Version](https://img.shields.io/badge/.NET-6.0-512BD4?logo=dotnet&logoColor=white)](https://dotnet.microsoft.com/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![GitHub Stars](https://img.shields.io/github/stars/LeulTew/CarRental-ThreeJS-MVC?style=social)](https://github.com/LeulTew/CarRental-ThreeJS-MVC)
 
-<br />
+**Fast, full-stack car rental platform** with an interactive Three.js landing page (no React), robust MVC backend, and PayPal sandbox payments. Experience cutting-edge web development in action!
 
-<img src="docs/assets/LandingPage.png" alt="Landing Page" width="900" />
+<img src="docs/assets/LandingPage.png" alt="Landing Page Screenshot" width="900" />
 
-<br />
-
-![Build](https://github.com/LeulTew/CarRental-ThreeJS-MVC/actions/workflows/dotnet.yml/badge.svg)
-![.NET](https://img.shields.io/badge/.NET-6.0-512BD4?logo=dotnet&logoColor=white)
-![ASP.NET Identity](https://img.shields.io/badge/Auth-ASP.NET%20Identity-512BD4)
-![EF Core](https://img.shields.io/badge/EF%20Core-SqlServer-512BD4)
-![Three.js](https://img.shields.io/badge/Three.js-Landing-black)
-![PayPal](https://img.shields.io/badge/Payments-PayPal%20Sandbox-00457C?logo=paypal&logoColor=white)
-![Git LFS](https://img.shields.io/badge/Repo-Git%20LFS%20enabled-FF4081)
+[🎥 **View Interactive Demo Video**](https://leultew.github.io/CarRental-ThreeJS-MVC/) | [📖 **Live App**](https://localhost:7022/) | [🐛 **Report Issue**](https://github.com/LeulTew/CarRental-ThreeJS-MVC/issues)
 
 </div>
 
-## Contents
-- Overview
-- Demo & Screens
-- Features
-- Architecture
-  - Module map
-  - Domain model (ER)
-  - Key flows
-- Tech stack
-- Setup & Run
-- Configuration (env vars)
-- Data & Migrations
-- Routes of interest
-- Performance & UX notes
-- Repository hygiene (LFS)
-- Resume highlights
+---
 
-## Overview
-This project showcases a pragmatic end‑to‑end car rental experience:
-- Landing page built with raw Three.js and GLTF models for an immersive first impression and excellent TTI (no React runtime cost).
-- MVC application for catalog, filtering, booking, payments, reviews, favorites, and role‑based management.
-
-Key paths for quick orientation:
-- App root: `Carrental/Carrental`
-- Landing: `Views/Home/Index.cshtml` + `wwwroot/Home/assets/js/main.js`
-- 3D assets: `wwwroot/car1..car4` (GLTF), content types mapped in `Program.cs`
-- Domain + Repos: `Carrental/Carrental/Models`
-- Controllers: `Carrental/Carrental/Controllers`
-- Payments: `Services/PaypalServices.cs` (+ `UnitOfWork.cs`)
-
-## Demo & Screens
-- Home (Three.js, model switcher): `Views/Home/Index.cshtml`
-- Catalog & filters: `/Car`
-- Payment screen: `Views/Car/ProcessPayment.cshtml`
-
-Inline demo (HTML5 video):
-
-[🎥 View Interactive Demo Video](https://leultew.github.io/CarRental-ThreeJS-MVC/)
-
-Placeholders (add your screenshots in `docs/screens/` and update paths):
-- Landing: `docs/screens/landing.png`
-- Catalog: `docs/screens/catalog.png`
-- Details/Booking: `docs/screens/details.png`
-- Payment: `docs/screens/payment.png`
-
-Demo video (mp4 in repo): `docs/assets/Carrentaldemo.mp4`
-
-## Features
-- Three.js landing page with GLTF loader and OrbitControls; responsive model scaling and arrow navigation
-- Comprehensive filtering: Make, Model, Type, Color (incl. "Other"), Price range, Availability, Favorites, Sort
-- Car details with gallery, versions (for sale), reviews, favorites
-- Booking: date range conflict check, total tracking, completion toggle 
-- Payments: PayPal sandbox checkout (redirect/return), exchange rate example for ETB->USD
-- Auth: ASP.NET Identity + Google OAuth; roles: Admin, Manager, Provider, Customer
-- Email: confirmation (HTML template `Views/Home/EmailConfirm.cshtml`) and forgot‑password via SMTP
-- Favorites: many‑to‑many between users and cars
-- Speech to text endpoint (Google Cloud Speech V1) ready for voice inputs
-
-## Architecture
-### Module map
-```
-Request -> Controller -> Repository/DbContext -> Domain -> ViewModel -> Razor View
-								 |-> Services (Payments | Email)
-Landing -> Three.js (GLTFLoader) -> wwwroot/car{1..4} models (served with correct MIME types)
-```
-
-Key controllers: `Home`, `Car`, `Account`, `Admin`, `Role`, `SpeechToText`
-
-### Domain model (ER)
-```
- AppUser 1─* Favorite *─1 Car
-	 |                    |
-	 |                    *─* Review (to AppUser via UserId)
-	 |
-	 *─* Booking 1─1 Payment
-
- Car 1─* CarImage
- Car 1─* CarVersion (for sale variants)
-```
-
-Notes:
-- `Favorite(UserId, CarId)` composite key; many‑to‑many between users and cars
-- `Booking` controls `IsCompleted` and links to `Payment` by `TransactionId`
-- Monetary columns mapped as `decimal(18,2)` via `OnModelCreating`
-
-### Key flows
-- Search/List: CarController.Index -> `CarFilters` pipeline (availability, sale/rent, make/model, type, color, price, favorites, sort)
-- Book (rent): create `Booking`, redirect to `ProcessPayment`, set `Payment.TransactionId`, update `Car.IsBooked`
-- Buy now (sale): simplified booking with `IsForSale`, same payment flow
-- PayPal: `PayUsingPayPal` -> PayPal approval -> `Success` sets `Booking.TransactionId`, persists `Payment`, toggles booking/car flags
-- Email confirmation: `BookingConfirmation` builds HTML from template, sends via SMTP
-
-## Tech stack
-- ASP.NET Core MVC (net6.0)
-- EF Core (SqlServer), IdentityDbContext<AppUser>
-- ASP.NET Identity + Google OAuth
-- PayPal .NET SDK (sandbox)
-- Three.js + GLTFLoader + OrbitControls
-- Razor views, vanilla JS/CSS, Swiper
-
-## Setup & Run
-1) Prereqs: .NET 6 SDK and SQL Server
-2) Copy config: `Carrental/Carrental/appsettings.example.json` -> `appsettings.Development.json` and fill values
-3) Ensure GLTF assets exist under `wwwroot/car1..car4` (tracked by Git LFS)
-4) Run the app from `Carrental/Carrental`
-
-### Optional commands (fish shell)
-```fish
-# restore & run
-dotnet restore Carrental/Carrental/Carrental.csproj
-dotnet run --project Carrental/Carrental/Carrental.csproj
-```
-
-Browse: https://localhost:7022/ (default launch settings may vary)
-
-## Configuration (env vars)
-Recommended to use environment variables for secrets in production:
-- `ConnectionStrings__MyConnection`
-- `GoogleKeys__ClientId`, `GoogleKeys__ClientSecret`
-- `AuthMessageSenderOptions__Email`, `AuthMessageSenderOptions__Password`, `AuthMessageSenderOptions__SmtpServer`, `AuthMessageSenderOptions__SmtpPort`
-- `PayPal__ClientId`, `PayPal__ClientSecret`
-
-See `appsettings.example.json` for structure.
-
-## Data & Migrations
-- DbContext: `CarContext`
-- Decimal precision configured for prices/payments
-- Many‑to‑many `Favorite` with composite key
-
-Apply migrations (if present) or create new ones:
-```fish
-dotnet ef database update --project Carrental/Carrental/Carrental.csproj
-# or
-dotnet ef migrations add Init --project Carrental/Carrental/Carrental.csproj
-dotnet ef database update --project Carrental/Carrental/Carrental.csproj
-```
-
-## Routes of interest
-- Landing: `GET /` (HomeController.Index)
-- Catalog: `GET /Car`
-- Search: `GET /Car/Search?searchTerm=...`
-- Details: `GET /Car/Details/{id}`
-- Book: `POST /Car/Book`
-- Buy Now: `POST /Car/BuyNow`
-- PayPal checkout: `POST /Car/PayUsingPayPal` -> `GET /Car/Success`
-- Favorites: `POST /Car/ToggleFavorite`
-- Auth: `GET/POST /Account/Login`, Google external login flow
-- Speech: `POST /SpeechToText` (binary audio, Google STT)
-
-## Performance & UX notes
-- Landing uses pure Three.js with import maps and CDN to minimize bundle size and time‑to‑interactive
-- GLTF assets served with correct MIME types via `FileExtensionContentTypeProvider`
-- Pagination and filter state preserved via query params
-
-## Repository hygiene (LFS)
-- `.gitattributes` tracks images, GLTF/GLB/ BIN and `.bacpac` via Git LFS to keep the repo lean
-- `.gitignore` excludes build output, local overrides, and Windows `:Zone.Identifier` artifacts
-- The large `Cars/` dataset is ignored by default (not required at runtime)
-
-## Resume highlights
-- Built a production‑style MVC application integrating auth, payments, email, and rich catalog filtering
-- Implemented a custom Three.js landing for visual impact without a front‑end framework
-- Applied repository pattern, clean entities, and precise EF mappings; handled many‑to‑many and monetary fields
-- Secured secrets via configuration binding and environment variables; enabled Git LFS for heavy assets
+## 📋 Table of Contents
+- [✨ Overview](#-overview)
+- [🎬 Demo & Screenshots](#-demo--screenshots)
+- [🚀 Features](#-features)
+- [🏗️ Architecture](#️-architecture)
+- [🛠️ Tech Stack](#️-tech-stack)
+- [⚡ Quick Start](#-quick-start)
+- [🔧 Configuration](#-configuration)
+- [🗄️ Data & Migrations](#️-data--migrations)
+- [🛣️ API Routes](#️-api-routes)
+- [⚡ Performance Notes](#-performance-notes)
+- [🧹 Repository Hygiene](#-repository-hygiene)
+- [🏆 Resume Highlights](#-resume-highlights)
 
 ---
 
-See `docs/summary.md` for engineering notes captured during the code read‑through.
+## ✨ Overview
+
+Welcome to **CarRental 5.0**, a showcase of modern web development excellence! This project delivers a complete car rental experience with:
+
+- **🎨 Immersive Landing**: Pure Three.js with GLTF models for stunning visuals and lightning-fast load times (no React overhead).
+- **🔧 Robust Backend**: ASP.NET Core MVC with Entity Framework, authentication, payments, and email integration.
+- **💳 Payment Integration**: Secure PayPal sandbox transactions with currency conversion.
+- **🔍 Advanced Filtering**: Multi-criteria search, favorites, reviews, and role-based management.
+
+### 🗂️ Project Structure
+```
+Carrental/
+├── Controllers/          # MVC Controllers (Home, Car, Account, etc.)
+├── Models/               # Domain entities & ViewModels
+├── Views/                # Razor templates
+├── Services/             # Business logic (Payments, Email)
+├── wwwroot/              # Static assets (Three.js, GLTF models)
+├── Migrations/           # EF Core migrations
+└── Program.cs            # App startup & configuration
+```
+
+**Key Files for Orientation:**
+- **Landing Page**: `Views/Home/Index.cshtml` + `wwwroot/Home/assets/js/main.js`
+- **3D Assets**: `wwwroot/car1..car4/` (GLTF models)
+- **Payments**: `Services/PaypalServices.cs`
+- **Database**: `Models/CarContext.cs`
+
+---
+
+## 🎬 Demo & Screenshots
+
+Dive into the action with our interactive demo and key app screens!
+
+### 🎥 Interactive Demo
+[🎬 **Watch Full Demo Video**](https://leultew.github.io/CarRental-ThreeJS-MVC/)  
+*Experience the Three.js landing, catalog browsing, booking flow, and payments in action!*
+
+### 📸 Key Screenshots
+
+| Feature | Description | File Path |
+|---------|-------------|-----------|
+| 🏠 **Home (Three.js Landing)** | Interactive 3D model viewer with navigation | `Views/Home/Index.cshtml` |
+| 📋 **Catalog & Filters** | Advanced search with make/model, price, availability | `/Car` |
+| 💳 **Payment Screen** | PayPal checkout with booking summary | `Views/Car/ProcessPayment.cshtml` |
+
+### 🖼️ Screenshots Gallery
+*Add your own screenshots to `docs/screens/` and update paths below:*
+- **Landing Page**: `docs/screens/landing.png`
+- **Catalog View**: `docs/screens/catalog.png`
+- **Details/Booking**: `docs/screens/details.png`
+- **Payment Flow**: `docs/screens/payment.png`
+
+**📥 Download Demo Video**: [docs/assets/Carrentaldemo.mp4](docs/assets/Carrentaldemo.mp4)
+
+---
+
+## 🚀 Features
+
+### 🎨 Frontend Highlights
+- **Three.js Landing Page**: GLTF model loading with OrbitControls, responsive scaling, and arrow navigation
+- **Responsive Design**: Mobile-friendly UI with vanilla JS/CSS and Swiper for galleries
+
+### 🔧 Backend Powerhouse
+- **Advanced Filtering**: Make, Model, Type, Color, Price Range, Availability, Favorites, Sorting
+- **Car Management**: Gallery, versions (for sale), reviews, favorites toggle
+- **Booking System**: Date conflict checks, total calculations, completion tracking
+- **Payment Processing**: PayPal sandbox with redirect/return flow and ETB→USD conversion
+
+### 🔐 Security & Auth
+- **ASP.NET Identity**: User registration, login, roles (Admin, Manager, Provider, Customer)
+- **Google OAuth**: External login integration
+- **Email Notifications**: Confirmation and forgot-password via SMTP with HTML templates
+
+### 🎤 Extra Features
+- **Favorites**: Many-to-many user-car relationships
+- **Speech-to-Text**: Google Cloud Speech API endpoint for voice inputs
+- **Role-Based Access**: Granular permissions for different user types
+
+---
+
+## 🏗️ Architecture
+
+### 🗺️ Module Map
+```
+HTTP Request
+    ↓
+Controller (Home/Car/Account)
+    ↓
+Repository / DbContext
+    ↓
+Domain Models → ViewModels
+    ↓
+Razor View
+    ↓
+HTML Response
+
+Parallel: Three.js → GLTFLoader → wwwroot/car{1..4} (MIME-mapped)
+```
+
+**Core Controllers**: `Home`, `Car`, `Account`, `Admin`, `Role`, `SpeechToText`
+
+### 🗃️ Domain Model (ER Diagram)
+```
+AppUser ──── Favorite ──── Car ──── CarImage
+   │            │            │
+   │            │            └─── CarVersion (sale variants)
+   │            │
+   └─── Booking ──── Payment
+        │
+        └─── Review (via UserId)
+```
+
+**Key Relationships:**
+- `Favorite`: Composite key (UserId, CarId) for many-to-many
+- `Booking`: Links to `Payment` via `TransactionId`, controls `IsCompleted`
+- `Car`: Supports both rental and sale modes
+- **Monetary Fields**: `decimal(18,2)` precision via EF mappings
+
+### 🔄 Key Flows
+- **Search & List**: `CarController.Index` → Filter pipeline → Paginated results
+- **Booking (Rent)**: Create `Booking` → Redirect to PayPal → Success updates DB
+- **Purchase (Sale)**: Simplified flow with `IsForSale` flag
+- **Payment**: `PayUsingPayPal` → Approval → `Success` persists transaction
+- **Email**: `BookingConfirmation` → HTML template → SMTP send
+
+---
+
+## 🛠️ Tech Stack
+
+| Category | Technologies |
+|----------|--------------|
+| **Backend** | ASP.NET Core MVC (.NET 6.0), Entity Framework Core (SQL Server) |
+| **Frontend** | Three.js + GLTFLoader + OrbitControls, Razor Views, Vanilla JS/CSS |
+| **Auth** | ASP.NET Identity, Google OAuth |
+| **Payments** | PayPal .NET SDK (Sandbox) |
+| **Email** | SMTP via AuthMessageSenderOptions |
+| **Database** | SQL Server with EF Migrations |
+| **Deployment** | GitHub Actions CI, Git LFS for assets |
+| **Other** | Swiper (galleries), Google Cloud Speech API |
+
+---
+
+## ⚡ Quick Start
+
+### Prerequisites
+- [.NET 6 SDK](https://dotnet.microsoft.com/download/dotnet/6.0)
+- [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) (or Docker for local)
+
+### Installation
+1. **Clone & Navigate**:
+   ```bash
+   git clone https://github.com/LeulTew/CarRental-ThreeJS-MVC.git
+   cd CarRental-ThreeJS-MVC
+   ```
+
+2. **Configure Environment**:
+   ```bash
+   cp Carrental/Carrental/appsettings.example.json Carrental/Carrental/appsettings.Development.json
+   # Edit appsettings.Development.json with your secrets
+   ```
+
+3. **Setup Database**:
+   ```bash
+   dotnet ef database update --project Carrental/Carrental/Carrental.csproj
+   ```
+
+4. **Run the App**:
+   ```bash
+   dotnet run --project Carrental/Carrental/Carrental.csproj
+   ```
+
+5. **Browse**: [https://localhost:7022/](https://localhost:7022/)
+
+### 🐟 Fish Shell Commands
+```fish
+# Restore dependencies
+dotnet restore Carrental/Carrental/Carrental.csproj
+
+# Run with hot reload
+dotnet run --project Carrental/Carrental/Carrental.csproj
+```
+
+---
+
+## 🔧 Configuration
+
+Secure your app with environment variables (recommended for production):
+
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `ConnectionStrings__MyConnection` | SQL Server connection string | `Server=localhost;Database=CarRental;...` |
+| `GoogleKeys__ClientId` | Google OAuth Client ID | `your-client-id.apps.googleusercontent.com` |
+| `GoogleKeys__ClientSecret` | Google OAuth Secret | `your-secret` |
+| `AuthMessageSenderOptions__Email` | SMTP email | `noreply@carrental.com` |
+| `AuthMessageSenderOptions__Password` | SMTP password | `your-password` |
+| `AuthMessageSenderOptions__SmtpServer` | SMTP server | `smtp.gmail.com` |
+| `AuthMessageSenderOptions__SmtpPort` | SMTP port | `587` |
+| `PayPal__ClientId` | PayPal Client ID | `your-paypal-client-id` |
+| `PayPal__ClientSecret` | PayPal Secret | `your-paypal-secret` |
+
+*See `appsettings.example.json` for full structure.*
+
+---
+
+## 🗄️ Data & Migrations
+
+- **DbContext**: `CarContext` (inherits `IdentityDbContext<AppUser>`)
+- **Precision**: Monetary fields use `decimal(18,2)` for accurate calculations
+- **Relationships**: Many-to-many `Favorite` with composite keys
+
+### Migration Commands
+```fish
+# Apply existing migrations
+dotnet ef database update --project Carrental/Carrental/Carrental.csproj
+
+# Create new migration
+dotnet ef migrations add YourMigrationName --project Carrental/Carrental/Carrental.csproj
+dotnet ef database update --project Carrental/Carrental/Carrental.csproj
+```
+
+---
+
+## 🛣️ API Routes
+
+| Route | Method | Description |
+|-------|--------|-------------|
+| `/` | GET | Landing page (Three.js) |
+| `/Car` | GET | Catalog with filters |
+| `/Car/Search` | GET | Search with query params |
+| `/Car/Details/{id}` | GET | Car details & booking |
+| `/Car/Book` | POST | Create rental booking |
+| `/Car/BuyNow` | POST | Purchase car |
+| `/Car/PayUsingPayPal` | POST | Initiate PayPal payment |
+| `/Car/Success` | GET | Payment success callback |
+| `/Car/ToggleFavorite` | POST | Add/remove favorite |
+| `/Account/Login` | GET/POST | User login (with Google OAuth) |
+| `/SpeechToText` | POST | Voice input processing |
+
+---
+
+## ⚡ Performance & UX Notes
+
+- **🚀 Fast Loading**: Pure Three.js with CDN imports minimizes bundle size and TTI
+- **📱 Responsive**: Adaptive model scaling and touch-friendly controls
+- **🔄 State Preservation**: Query params maintain filter/pagination state
+- **🎯 MIME Types**: GLTF assets served correctly via `FileExtensionContentTypeProvider`
+
+---
+
+## 🧹 Repository Hygiene
+
+- **Git LFS**: Tracks large assets (images, GLTF/GLB, videos, .bacpac) to keep repo lean
+- **.gitignore**: Excludes build artifacts, secrets, Windows artifacts, and bulk datasets
+- **Ignored Assets**: `Cars/` folder (optional local data)
+
+---
+
+## 🏆 Resume Highlights
+
+This project demonstrates enterprise-level skills:
+- **Full-Stack Mastery**: ASP.NET MVC with EF Core, Three.js integration, payment processing
+- **Architecture Excellence**: Repository pattern, clean domain models, precise mappings
+- **Security Best Practices**: Config binding, env vars, OAuth integration
+- **Performance Optimization**: CDN usage, LFS for assets, responsive design
+- **DevOps Ready**: CI/CD with GitHub Actions, migrations, container-friendly
+
+*Perfect for portfolios—showcases modern web dev from 3D graphics to secure payments!*
+
+---
+
+**📚 Engineering Notes**: See `docs/summary.md` for detailed code insights.
+
+<div align="center">
+Made with ❤️ by [Leul Tew](https://github.com/LeulTew)
+</div>
