@@ -1,0 +1,35 @@
+﻿@using Carrental.Models;
+@model RoleEdit
+@{
+    ViewData["Title"] = "UPDATE ROLE";
+}
+<link rel="stylesheet" href="~/css/UpdateRole.css">
+
+<h1 class="update-role-title">Update Role</h1>
+<a asp-action="Index" class="btn btn-secondary no-underline">Back</a>
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<form id="roleForm" method="post">
+    <input type="hidden" name="roleName" value="@Model.Role.Name" />
+    <input type="hidden" name="roleId" value="@Model.Role.Id" />
+    <p class="update-role-description">
+        Check the users to add to the @Model.Role.Name role. Uncheck to remove them.
+    </p>
+    <div id="checklist">
+        @foreach (AppUser user in Model.NonMembers)
+        {
+            <input type="checkbox" name="AddIds" value="@user.Id">
+            <label>@user.UserName</label>
+        }
+        @foreach (AppUser user in Model.Members)
+        {
+            <input type="checkbox" name="DeleteIds" value="@user.Id" checked>
+            <label>@user.UserName</label>
+        }
+    </div>
+    <button type="submit" class="btn-update">
+        <span class="box">
+            Update
+        </span>
+    </button>
+</form>

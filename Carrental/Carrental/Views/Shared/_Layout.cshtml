@@ -1,0 +1,420 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Carrental.Models;
+@inject UserManager<AppUser> userManager
+@inject SignInManager<AppUser> signInManager
+@{
+    string? searchTerm = ViewData["searchTerm"] as string;
+    bool showForSale = ViewData["showForSale"] != null ? (bool)ViewData["showForSale"] : false;
+    string controllerName = ViewContext.RouteData.Values["Controller"].ToString();
+    string actionName = ViewContext.RouteData.Values["Action"].ToString();
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Carrental</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/header.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+
+        <nav class="main-navigation">
+            <div class="navigation-card">
+                <a href="@Url.Action("Index", "Car")" class="deez">
+                    <svg class="svgIcon"
+                         viewBox="0 0 104 100"
+                         fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M100.5 40.75V96.5H66V68.5V65H62.5H43H39.5V68.5V96.5H3.5V40.75L52 4.375L100.5 40.75Z"
+                              stroke="black"
+                              stroke-width="7"></path>
+                    </svg>
+                </a>
+                @if (signInManager.IsSignedIn(User))
+                {
+                    <a href="@Url.Action("Settings", "Account")" class="deez">
+                        <svg width="104"
+                             height="100"
+                             viewBox="0 0 104 100"
+                             fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <rect x="21.5"
+                                  y="3.5"
+                                  width="60"
+                                  height="60"
+                                  rx="30"
+                                  stroke="black"
+                                  stroke-width="7"></rect>
+                            <g clip-path="url(#clip0_41_27)">
+                                <mask id="mask0_41_27"
+                                      style="mask-type:luminance"
+                                      maskUnits="userSpaceOnUse"
+                                      x="0"
+                                      y="61"
+                                      width="104"
+                                      height="52">
+                                    <path d="M0 113C0 84.2812 23.4071 61 52.1259 61C80.706 61 104 84.4199 104 113H0Z"
+                                          fill="white"></path>
+                                </mask>
+                                <g mask="url(#mask0_41_27)">
+                                    <path d="M-7 113C-7 80.4152 19.4152 54 52 54H52.2512C84.6973 54 111 80.3027 111 112.749H97C97 88.0347 76.9653 68 52.2512 68H52C27.1472 68 7 88.1472 7 113H-7ZM-7 113C-7 80.4152 19.4152 54 52 54V68C27.1472 68 7 88.1472 7 113H-7ZM52.2512 54C84.6973 54 111 80.3027 111 112.749V113H97V112.749C97 88.0347 76.9653 68 52.2512 68V54Z"
+                                          fill="black"></path>
+                                </g>
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_41_27">
+                                    <rect width="104"
+                                          height="39"
+                                          fill="white"
+                                          transform="translate(0 61)"></rect>
+                                </clipPath>
+                            </defs>
+                        </svg>
+                    </a>
+                }
+                else
+                {
+                    <a href="@Url.Action("Login", "Account")" class="deez">
+                        <svg width="104"
+                             height="100"
+                             viewBox="0 0 104 100"
+                             fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <rect x="21.5"
+                                  y="3.5"
+                                  width="60"
+                                  height="60"
+                                  rx="30"
+                                  stroke="black"
+                                  stroke-width="7"></rect>
+                            <g clip-path="url(#clip0_41_27)">
+                                <mask id="mask0_41_27"
+                                      style="mask-type:luminance"
+                                      maskUnits="userSpaceOnUse"
+                                      x="0"
+                                      y="61"
+                                      width="104"
+                                      height="52">
+                                    <path d="M0 113C0 84.2812 23.4071 61 52.1259 61C80.706 61 104 84.4199 104 113H0Z"
+                                          fill="white"></path>
+                                </mask>
+                                <g mask="url(#mask0_41_27)">
+                                    <path d="M-7 113C-7 80.4152 19.4152 54 52 54H52.2512C84.6973 54 111 80.3027 111 112.749H97C97 88.0347 76.9653 68 52.2512 68H52C27.1472 68 7 88.1472 7 113H-7ZM-7 113C-7 80.4152 19.4152 54 52 54V68C27.1472 68 7 88.1472 7 113H-7ZM52.2512 54C84.6973 54 111 80.3027 111 112.749V113H97V112.749C97 88.0347 76.9653 68 52.2512 68V54Z"
+                                          fill="black"></path>
+                                </g>
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_41_27">
+                                    <rect width="104"
+                                          height="39"
+                                          fill="white"
+                                          transform="translate(0 61)"></rect>
+                                </clipPath>
+                            </defs>
+                        </svg>
+                    </a>
+                }
+
+                <a id="search-button-alt" class="deez">
+                    <svg width="101"
+                         height="114"
+                         viewBox="0 0 101 114"
+                         fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="46.1726"
+                                cy="46.1727"
+                                r="29.5497"
+                                transform="rotate(36.0692 46.1726 46.1727)"
+                                stroke="black"
+                                stroke-width="7"></circle>
+                        <line x1="61.7089"
+                              y1="67.7837"
+                              x2="97.7088"
+                              y2="111.784"
+                              stroke="black"
+                              stroke-width="7"></line>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="left">
+                <a asp-controller="Car" asp-action="Index">
+                    <img src="~/css/splash/logo.png" alt="Company Logo" class="logo-img"> <!-- Added class for logo image -->
+                </a>
+            </div>
+
+            @if (User.IsInRole("Manager") || User.IsInRole("Admin"))
+            {
+                <nav class="nav-bar nav-bar--buttons">
+                    <a asp-controller="Car" asp-action="Index" class="nav-bar__link">Home</a>
+                    @if (User.IsInRole("Manager"))
+                    {
+                        <a asp-controller="Car" asp-action="List" class="nav-bar__link">List</a>
+                    }
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-controller="Admin" asp-action="Index" class="nav-bar__link">All Users</a>
+                    }
+                    <!-- Search button -->
+                    <button id="search-button" class="search-button">
+                        <span>
+                            <svg viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9.145 18.29c-5.042 0-9.145-4.102-9.145-9.145s4.103-9.145 9.145-9.145 9.145 4.103 9.145 9.145-4.102 9.145-9.145 9.145zm0-15.167c-3.321 0-6.022 2.702-6.022 6.022s2.702 6.022 6.022 6.022 6.023-2.702 6.023-6.022-2.702-6.022-6.023-6.022zm9.263 12.443c-.817 1.176-1.852 2.188-3.046 2.981l5.452 5.453 3.014-3.013-5.42-5.421z"></path>
+                            </svg>
+                        </span>
+                    </button>
+                </nav>
+            }
+
+
+            else
+            {
+                <button id="search-button" class="search-button" style="display:none;">
+                    <span>
+                        <svg viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9.145 18.29c-5.042 0-9.145-4.102-9.145-9.145s4.103-9.145 9.145-9.145 9.145 4.103 9.145 9.145-4.102 9.145-9.145 9.145zm0-15.167c-3.321 0-6.022 2.702-6.022 6.022s2.702 6.022 6.022 6.022 6.023-2.702 6.023-6.022-2.702-6.022-6.023-6.022zm9.263 12.443c-.817 1.176-1.852 2.188-3.046 2.981l5.452 5.453 3.014-3.013-5.42-5.421z"></path>
+                        </svg>
+                    </span>
+                </button>
+
+                <form method="get" action="@Url.Action("Search", "Car")" class="InputContainer">
+                    <div id="search-container2" class="search-container2">
+                        <input type="text" id="search-input" name="searchTerm" class="search-input" value="@searchTerm" placeholder="Search...">
+                        <input type="hidden" name="showForSale" value="@ViewData["showForSale"]" />
+                        <button type="submit" id="search-submit" class="search-submit">
+                            <label for="search-submit" class="labelforsearch">
+                                <svg viewBox="0 0 512 512" class="searchIcon"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg>
+                            </label>
+                        </button>
+                        <div class="border1"></div>
+                        <button type="button" id="micButton" class="micButton">
+                            <svg viewBox="0 0 384 512" class="micIcon">
+                                <path d="M192 0C139 0 96 43 96 96V256c0 53 43 96 96 96s96-43 96-96V96c0-53-43-96-96-96zM64 216c0-13.3-10.7-24-24-24s-24 10.7-24 24v40c0 89.1 66.2 162.7 152 174.4V464H120c-13.3 0-24 10.7-24 24s10.7 24 24 24h72 72c13.3 0 24-10.7 24-24s-10.7-24-24-24H216V430.4c85.8-11.7 152-85.3 152-174.4V216c0-13.3-10.7-24-24-24s-24 10.7-24 24v40c0 70.7-57.3 128-128 128s-128-57.3-128-128V216z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+            }
+
+
+
+
+
+
+
+            <div class="right">
+                @if (signInManager.IsSignedIn(User))
+                {
+                    <a href="@Url.Action("Settings", "Account")" class="button-link">
+                        <button id="btn-message" class="button-message">
+                            <div class="content-avatar">
+                                <div class="status-user"></div>
+                                <div class="avatar">
+                                    <svg class="user-img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path d="M12,12.5c-3.04,0-5.5,1.73-5.5,3.5s2.46,3.5,5.5,3.5,5.5-1.73,5.5-3.5-2.46-3.5-5.5-3.5Zm0-.5c1.66,0,3-1.34,3-3s-1.34-3-3-3-3,1.34-3,3,1.34,3,3,3Z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="notice-content">
+                                @{
+                                    var user = await userManager.GetUserAsync(User);
+                                }
+                                <div class="username">@User.Identity.Name</div>
+                                <div class="lable-message">Settings</div>
+                                @if (user != null)
+                                {
+                                    <div class="user-id">@@ @user.Email</div>
+                                }
+                            </div>
+                        </button>
+                    </a>
+                }
+                else
+                {
+                    <div class="nav-item">
+                        <button class="defbtn"><a href="@Url.Action("Login", "Account", new { returnUrl = "/Car" })">Login/SignUp</a></button>
+                    </div>
+                }
+            </div>
+
+        </nav>
+
+        <!-- Search Input -->
+
+        <form method="get" action="@Url.Action("Search", "Car")" class="InputContainer">
+            <div id="search-container" class="search-container">
+                <input type="text" id="search-input" name="searchTerm" class="search-input" value="@searchTerm" placeholder="Search...">
+                <input type="hidden" name="showForSale" value="@ViewData["showForSale"]" />
+                <button type="submit" id="search-submit" class="search-submit">
+                    <label for="search-submit" class="labelforsearch">
+                        <svg viewBox="0 0 512 512" class="searchIcon"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg>
+                    </label>
+                </button>
+                <div class="border1"></div>
+                <button type="button" id="micButton" class="micButton">
+                    <svg viewBox="0 0 384 512" class="micIcon">
+                        <path d="M192 0C139 0 96 43 96 96V256c0 53 43 96 96 96s96-43 96-96V96c0-53-43-96-96-96zM64 216c0-13.3-10.7-24-24-24s-24 10.7-24 24v40c0 89.1 66.2 162.7 152 174.4V464H120c-13.3 0-24 10.7-24 24s10.7 24 24 24h72 72c13.3 0 24-10.7 24-24s-10.7-24-24-24H216V430.4c85.8-11.7 152-85.3 152-174.4V216c0-13.3-10.7-24-24-24s-24 10.7-24 24v40c0 70.7-57.3 128-128 128s-128-57.3-128-128V216z"></path>
+                    </svg>
+                </button>
+            </div>
+        </form>
+
+
+
+    </header>
+
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+        @if (signInManager.IsSignedIn(User))
+        {
+            <!-- Logout Button -->
+            <div class="slick-section" style="position: fixed !important; bottom: 20px !important; left: 20px !important;">
+                <button class="logout" onclick="logout()">
+
+                    <div class="sign"><svg viewBox="0 0 512 512"><path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path></svg></div>
+
+                    <div class="text">Logout</div>
+                </button>
+            </div>
+        }
+    </div>
+
+    @*
+    <footer class="border-top footer text-muted">
+    <div class="container">
+    &copy; 2024 - Carrental - <a asp-area="" asp-page="/Privacy">Privacy</a>
+    </div>
+
+    </footer>
+    *@
+    <footer>
+        @await Html.PartialAsync("_Footer.cshtml")
+    </footer>
+
+
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const navLinks = document.querySelectorAll(".nav-bar__link");
+            const currentUrl = window.location.pathname;
+
+            navLinks.forEach((link) => {
+                // Remove is-active class from all links
+                link.classList.remove("is-active");
+
+                // Find the link corresponding to the current URL and add is-active class to it
+                if (link.getAttribute("href") === currentUrl) {
+                    link.classList.add("is-active");
+                }
+            });
+
+            // Event listener for click events on links
+            navLinks.forEach((link) => {
+                link.addEventListener("click", () => {
+                    const currentActiveLink = document.querySelector(".nav-bar__link.is-active");
+                    currentActiveLink.classList.remove("is-active");
+                    link.classList.add("is-active");
+                });
+            });
+        });
+    </script>
+
+    <script>
+        function logout() {
+            // Perform logout action here, such as redirecting to the logout endpoint
+            window.location.href = '@Url.Action("Logout", "Account")';
+        }
+    </script>
+
+
+    <!-- JavaScript to handle search button click -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var controllerName = "@controllerName";
+            var actionName = "@actionName";
+            const searchButton = document.getElementById('search-button');
+            const searchButtonAlt = document.getElementById('search-button-alt');
+            const searchContainer = document.getElementById('search-container');
+
+
+            // Toggle visibility of search container on button click
+            searchButton.addEventListener('click', toggleSearchContainer);
+            searchButtonAlt.addEventListener('click', toggleSearchContainer);
+
+            // Function to toggle search container visibility
+            function toggleSearchContainer() {
+                searchContainer.classList.toggle('show');
+            }
+        });
+
+
+
+        const searchInput = document.getElementById('search-input');
+        const micButton = document.getElementById('micButton');
+
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            micButton.addEventListener('click', async () => {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    const recorder = new MediaRecorder(stream);
+                    const audioChunks = [];
+
+                    recorder.addEventListener('dataavailable', (event) => {
+                        audioChunks.push(event.data);
+                    });
+
+                    recorder.addEventListener('stop', async () => {
+                        const audioBlob = new Blob(audioChunks);
+                        const audioFile = new File([audioBlob], 'speech.wav', { type: 'audio/wav' });
+
+                        const formData = new FormData();
+                        formData.append('audio', audioFile);
+
+                        const response = await fetch('/SpeechToText', {
+                            method: 'POST',
+                            body: formData,
+                        });
+
+                        if (response.ok) {
+                            const transcription = await response.text();
+                            if (searchInput) {
+                                searchInput.value = transcription; // Update the search input with the transcribed text
+                            } else {
+                                console.error('Search input element not found.');
+                            }
+                        } else {
+                            console.error('Error:', response.statusText);
+                        }
+                    });
+
+                    recorder.start();
+                    setTimeout(() => {
+                        recorder.stop();
+                        stream.getTracks().forEach(track => track.stop()); // Stop audio stream
+                    }, 3000); // Adjust the duration as needed
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            });
+        } else {
+            console.error('getUserMedia not supported in this browser.');
+        }
+
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,34 @@
+# .NET build outputs
+bin/
+obj/
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Logs
+*.log
+logs/
+
+# Secrets & local config overrides
+appsettings.Local.json
+appsettings.*.local.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Rider/JetBrains
+.idea/
+
+# Node build artifacts in wwwroot (if any)
+**/node_modules/
+**/dist/
+
+# Large asset raw sources
+Cars/**
+!Cars/.gitattributes
+
+# Windows alternate data streams copied from zip
+**:Zone.Identifier

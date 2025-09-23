@@ -1,0 +1,371 @@
+﻿@model Carrental.Models.CarListModel;
+@{
+    ViewData["Title"] = "List Car";
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listing page</title>
+    <link rel="stylesheet" href="~/css/listing.css">
+</head>
+<body>
+    <div class="containerL">
+        <section class="section">           
+
+            <section class="filter">
+                <form id="filter-rest" method="get">
+                    <input type="hidden" name="showForSale" value="@ViewBag.ShowForSale.ToString().ToLower()" />
+                <div class="filtop">
+                    <div>
+                        <h3>Filters</h3>
+                    </div>
+                            <button id="reset-btn" type="submit" class="defbtn">Reset</button>
+                </div>
+                                        </form>
+                <form id="filter-form" method="get">
+                    <input type="hidden" name="showForSale" value="@ViewBag.ShowForSale.ToString().ToLower()" />
+                <div class="filter-section">
+                    <div>
+                            <label for="car-make">Choose a Car Make</label>
+                            <select id="car-make" name="make" class="custom-select" onchange="updateCarModels(this)">
+                                <option value="All">All</option>
+                                @foreach (var carMake in Model.AllCarMakes)
+                                {
+                                    <option value="@carMake">@carMake</option>
+                                }
+                            </select>
+
+                            <label for="car-model">Choose a Car Model</label>
+                            <select id="car-model" name="model" class="custom-select" onchange="this.form.submit()">
+                                <option value="All">All</option>
+                                @if (!string.IsNullOrEmpty(Model.SelectedMake) && Model.SelectedMake != "All")
+                                {
+                                    foreach (var carModel in Model.AllCarModels)
+                                    {
+                                        <option value="@carModel">@carModel</option>
+                                    }
+                                }
+                            </select>
+                    </div>
+                </div>
+                <script>
+                        // Pre-select the make and model based on the values stored in the CarListModel object
+                        document.addEventListener("DOMContentLoaded", function () {
+                            var selectedMake = "@Model.SelectedMake";
+                            var selectedModel = "@Model.SelectedModel";
+                            document.getElementById("car-make").value = selectedMake;
+                            document.getElementById("car-model").value = selectedModel;
+                        });
+                </script>
+
+
+                <div class="filter-section">
+                    <div class="wrapper">
+                            <div class="sort-options">
+                                    <label for="sort-by">Sort by:</label>
+                                <select id="sort-by" name="sort" onchange="sortCars()" class="futuristic-select">
+                                    <option value="default" >Default</option>
+                                    <option value="price-low-to-high">Price: Low to High</option>
+                                    <option value="price-high-to-low" >Price: High to Low</option>
+                                    </select>
+                                    <input type="hidden" name="page" value="1" />
+                            </div>
+                            @if(Model.ShowForSale==false)
+                            {
+                                <div class="multi-range-slider">
+                                    <input type="range" name="minPrice" id="price-range-min" class="input-left" min="22" step="1" max="280" value="@Model.MinPrice" oninput="updatePriceLabels('min'); delaySubmitForm();">
+                                    <input type="range" name="maxPrice" id="price-range-max" class="input-right" min="22" step="1" max="600" value="@Model.MaxPrice" oninput="updatePriceLabels('max'); delaySubmitForm();">
+
+                                    <div class="slider">
+                                        <div class="track"></div>
+                                        <div class="range"></div>
+                                    </div>
+                                </div>
+                                <div class="price__wrapper">
+                                    <span class="price-from" id="price-min">Br. @Model.MinPrice</span>
+                                    <span class="price-to" id="price-max">Br. @Model.MaxPrice</span>
+                                </div>
+                            }
+                    </div>
+                </div>
+
+                <!--Type-->
+                <div class="filter-section">
+                    <label class="filtlab">Car Type</label>
+                    <div class="rowA">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="sedan" name="types" value="sedan" onchange="filterByType()" @(Model.Types != null && Model.Types.Contains("sedan") ? "checked" : "")>
+                            <label for="sedan">Sedan</label>
+                        </div>
+                        <div class="checkbox-item">
+                                <input type="checkbox" id="van" name="types" value="van" onchange="filterByType()" @(Model.Types != null && Model.Types.Contains("van") ? "checked" : "")>
+                            <label for="van">Van</label>
+                        </div>
+                        <div class="checkbox-item">
+                                <input type="checkbox" id="pickup" name="types" value="pickup" onchange="filterByType()" @(Model.Types != null && Model.Types.Contains("pickup") ? "checked" : "")>
+                            <label for="pickup">Pickup</label>
+                        </div>
+                    </div>
+                    <div class="rowA">
+                        <div class="checkbox-item">
+                                <input type="checkbox" id="wagon" name="types" value="wagon" onchange="filterByType()" @(Model.Types != null && Model.Types.Contains("wagon") ? "checked" : "")>
+                            <label for="wagon">Wagon</label>
+                        </div>
+                        <div class="checkbox-item">
+                                <input type="checkbox" id="minivan" name="types" value="minivan" onchange="filterByType()" @(Model.Types != null && Model.Types.Contains("minivan") ? "checked" : "")>
+                            <label for="minivan">Minivan</label>
+                        </div>
+                        <div class="checkbox-item">
+                                <input type="checkbox" id="coupe" name="types" value="hatchback" onchange="filterByType()" @(Model.Types != null && Model.Types.Contains("hatchback") ? "checked" : "")>
+                                <label for="coupe">Hatchback</label>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                        document.addEventListener("DOMContentLoaded", function () {
+                            var sortBy = "@Model.SortBy";
+                            var sortBySelect = document.getElementById("sort-by");
+
+                            // Loop through the options and set the selected attribute if the value matches Model.SortBy
+                            for (var i = 0; i < sortBySelect.options.length; i++) {
+                                if (sortBySelect.options[i].value === sortBy) {
+                                    sortBySelect.options[i].selected = true;
+                                    break; // Exit the loop once the option is selected
+                                }
+                            }
+                        });
+                </script>
+
+                <!--Color-->
+                <div class="filter-section">
+                    <label class="filtlab">Color</label>
+                    <div class="rowA">
+                        <div class="color-item">
+                            <div class="colp">
+                                <label class="chk-container">
+                                        <input type="checkbox" id="black" name="colors" value="black" onchange="filterByColor()" @(Model.Colors != null && Model.Colors.Contains("black") ? "checked" : "")>
+									<div class="chk-checkmark" style="background-color: black;"></div>
+                                </label>
+                            </div>
+                            <label for="black"><span ></span> Black</label>
+                        </div>
+                        <div class="color-item">
+                            <div class="colp">
+                                <label class="chk-container">
+                                        <input type="checkbox" id="white" name="colors" value="white" onchange="filterByColor()" @(Model.Colors != null && Model.Colors.Contains("white") ? "checked" : "")>
+                                    <div class="chk-checkmark" 
+                                    style="background-color: white; box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);"></div>
+                                </label>
+                            </div>
+                            <label for="white"><span ></span> White</label>
+                        </div>
+                        <div class="color-item">
+                            <div class="colp">
+                                <label class="chk-container">
+                                        <input type="checkbox" id="red" name="colors" value="red" onchange="filterByColor()" @(Model.Colors != null && Model.Colors.Contains("red") ? "checked" : "")>
+                                    <div class="chk-checkmark" style="background-color: red;"></div>
+                                </label>
+                            </div>
+                            <label for="red"><span ></span> Red</label>
+                        </div>
+                    </div>
+                    <div class="rowA">
+                        <div class="color-item">
+                            <div class="colp">
+                                <label class="chk-container">
+                                        <input type="checkbox" id="dark-blue" name="colors" value="dark-blue" onchange="filterByColor()" @(Model.Colors != null && Model.Colors.Contains("dark-blue") ? "checked" : "")>
+									<div class="chk-checkmark" style="background-color: blue;"></div>
+                                </label>
+                            </div>
+                            <label for="dark-blue"><span ></span> Dark Blue</label>
+                        </div>
+                        <div class="color-item">
+                            <div class="colp">
+                                <label class="chk-container">
+                                        <input type="checkbox" id="silver" name="colors" value="silver" onchange="filterByColor()" @(Model.Colors != null && Model.Colors.Contains("silver") ? "checked" : "")>
+                                    <div class="chk-checkmark" style="background-color: silver;"></div>
+                                </label>
+                            </div>
+                            <label for="silver"><span></span> Silver</label>
+                        </div>
+                        <div class="color-item">
+                            <div class="colp">
+                                <label class="chk-container">
+                                        <input type="checkbox" id="other" name="colors" value="other" onchange="filterByColor()" @(Model.Colors != null && Model.Colors.Contains("other") ? "checked" : "")>
+                                    <div class="chk-checkmark" style="background: linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(255,154,0,1) 10%, rgba(208,222,33,1) 20%, rgba(79,220,74,1) 30%, rgba(63,218,216,1) 40%, rgba(47,201,226,1) 50%, rgba(28,127,238,1) 60%, rgba(95,21,242,1) 70%, rgba(186,12,248,1) 80%, rgba(251,7,217,1) 90%, rgba(255,0,0,1) 100%);"></div>
+                                </label>
+                            </div>
+                            <label for="other"><span></span> Other</label>
+                        </div>
+                    </div>
+                </div>
+
+                    <!-- Avail -->
+                    <div class="filter-section">
+                        <label class="filtlab2">Available</label>
+                        <div>
+                            <label class="switch">
+                                <input type="checkbox" id="available-now" name="availableNow" value="true" onchange="filterAvailableNow(this)" @(Model.IsAvailableNow.Value ? "checked" : "")>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="filter-section">
+                            <label class="filtlab2">Favorites</label>
+                            <div>
+                                <label class="switch">
+                                    <input type="checkbox" id="favorites-checkbox" name="favorites" value="true" onchange="filterByFavorites(this)" @(Model.isFav.Value ? "checked" : "")>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    }
+
+                </form>
+
+            </section>
+           
+            <main class="listing">
+                <div class="listType">
+                    <!-- Filter Logo with Text -->
+                    <div class="slick-sectionA">
+                        <button title="Filter" class="filter-b">
+                            <svg viewBox="0 0 512 512" height="1em">
+                                <path d="M0 416c0 17.7 14.3 32 32 32l54.7 0c12.3 28.3 40.5 48 73.3 48s61-19.7 73.3-48L480 448c17.7 0 32-14.3 32-32s-14.3-32-32-32l-246.7 0c-12.3-28.3-40.5-48-73.3-48s-61 19.7-73.3 48L32 384c-17.7 0-32 14.3-32 32zm128 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zM320 256a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm32-80c-32.8 0-61 19.7-73.3 48L32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l246.7 0c12.3 28.3 40.5 48 73.3 48s61-19.7 73.3-48l54.7 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-54.7 0c-12.3-28.3-40.5-48-73.3-48zM192 128a32 32 0 1 1 0-64 32 32 0 1 1 0 64zm73.3-64C253 35.7 224.8 16 192 16s-61 19.7-73.3 48L32 64C14.3 64 0 78.3 0 96s14.3 32 32 32l86.7 0c12.3 28.3 40.5 48 73.3 48s61-19.7 73.3-48L480 128c17.7 0 32-14.3 32-32s-14.3-32-32-32L265.3 64z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <form id="filter-form2" method="get">
+                        <div class="tabs">
+                            <input type="radio" id="radio-1" name="showForSale" value="false" onchange="filterRent(this)" @(Model.ShowForSale == false || ViewBag.ShowForSale.ToString().ToLower() == "false" ? "checked" : "")>
+                            <label class="tabA" for="radio-1">Rent</label>
+                            <input type="radio" id="radio-2" name="showForSale" value="true" onchange="filterBuy(this)" @(Model.ShowForSale == true || ViewBag.ShowForSale.ToString().ToLower() == "true" ? "checked" : "")>
+                            <label class="tabA" for="radio-2">Buy</label>
+                            <span class="glider"></span>
+                        </div>
+                        <input type="hidden" name="searchTerm" value="@ViewData["searchTerm"]" />
+                    </form>
+                </div>
+
+
+                <div class="row">
+                    @if (Model.Cars.Any())
+                    {
+                        foreach (var car in Model.PaginatedCars())
+                        {
+                            string status = ""; // Initialize status variable
+                            string statusBackground = ""; // Initialize status background variable
+                            if (car.IsBooked)
+                            {
+                                status = "Booked";
+                                statusBackground = "linear-gradient(120deg, #91939e, #e3e3e3)"; // Gradient for booked
+                            }
+                            else if (car.IsNew)
+                            {
+                                status = "New";
+                                statusBackground = "linear-gradient(120deg, #fe935a, #e3e3e3)"; // Gradient for new
+                            }
+                            else
+                            {
+                                status = "Available";
+                                statusBackground = "linear-gradient(120deg, #1db390, #e3e3e3)"; // Gradient for available
+                            }
+                            var priceHour = (car.IsForSale == true ? 0 : car.RentPricePerHour);
+                            <a href="@Url.Action("Details", "Car", new { id = car.CarId })" style="text-decoration: none;">
+                                <div class="parent">
+                                    <div class="card" data-for-sale="@car.IsForSale"
+                                         data-make="@car.Make" data-model="@car.Model" data-color="@car.Color"
+                                         data-rent-price-per-hour="@priceHour" data-car-id="@car.CarId"
+                                         data-available="@(!car.IsBooked)" data-type="@car.CarType">
+                                        <div class="content-box">
+                                            @if (User.Identity.IsAuthenticated && Model.IsFavorite!=null)
+                                            {
+                                                <form method="post" action="@Url.Action("ToggleFavorite", "Car", new { carId = car.CarId })" id="favorite-form-@car.CarId">
+                                                    <div class="heart-container" title="Like">
+                                                        <input type="checkbox" class="checkbox" id="favorite-checkbox-@car.CarId" name="favorite" onchange="submitFavoriteForm(@car.CarId)" @(Model.IsFavorite[Model.Cars.IndexOf(car)] ? "checked" : "")>                                                        <div class="svg-container">
+                                                            <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                                                                </path>
+                                                            </svg>
+                                                            <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                                                                </path>
+                                                            </svg>
+                                                            <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                                                                <polygon points="10,10 20,20"></polygon>
+                                                                <polygon points="10,50 20,50"></polygon>
+                                                                <polygon points="20,80 30,70"></polygon>
+                                                                <polygon points="90,10 80,20"></polygon>
+                                                                <polygon points="90,50 80,50"></polygon>
+                                                                <polygon points="80,80 70,70"></polygon>
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                                <script>
+                                                    function submitFavoriteForm(carId) {
+                                                        var form = document.getElementById("favorite-form-" + carId);
+                                                        form.submit();
+                                                    }
+                                                </script>
+                                            }
+
+                                            <img class="cardimg" src="@Url.Content(car.ImageUrl)" alt="">
+                                            <p class="card-content">
+                                                @if (@car.IsForSale)
+                                                {
+                                                    <span class="card-title">@car.Make @car.Model @car.Year</span>
+                                                    <span class="see-more"> @car.SalePrice Br </span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="card-title">@car.Make @car.Model @car.Year</span>
+                                                    <span class="see-more"> @car.RentPricePerHour Br./ Hour</span>
+                                                }
+
+                                            </p>
+
+                                        </div>
+                                        <div class="date-box" style="background: @statusBackground;">
+                                            <span class="month">@status</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                    }
+                                else
+                                {
+                        <div id="no-cars-found-message" class="no-cars-found-message" style="@(Model.Cars.Any() ? "display: none;" : "display: block;")">
+                            No Cars Found
+                        </div>
+                                }
+                </div>
+                <div class="pagination">
+                    <ul>
+                        <!-- Pagination links will be inserted here dynamically -->
+                        @for (int i = 1; i <= Model.PageCount(); i++)
+                        {
+                            <li class="numb @(i == Model.CurrentPage ? "active" : "")">
+                                <a class="page-link" href="@Url.Action("Index", new { page = i, isForSale = ViewBag.IsForSale, make = ViewBag.Make, model = ViewBag.Model })">@i</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+
+
+
+</main>
+        </section>
+    </div>
+    <script src="~/js/listing.js"></script>
+    @Html.Partial("_cookie.cshtml")
+</body>
+</html>

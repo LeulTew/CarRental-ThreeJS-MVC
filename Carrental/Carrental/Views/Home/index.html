@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+    <meta name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<title>RentCar</title>
+    <link rel="stylesheet" href="~/Home/public/index.css"> <!-- Use ~/ to reference the root directory -->
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.5/css/swiper.min.css'>
+    <link rel="stylesheet" href="~/~/Home/assets/css/style4.css"> <!-- Use ~/ to reference the root directory -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+    <script type="importmap">
+        {
+          "imports": {
+            "three": "https://unpkg.com/three@v0.153.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@v0.153.0/examples/jsm/"
+          }
+        }
+    </script>
+</head>
+
+<body>
+
+    <div class="header">
+        <nav class="main-navigation">
+            <div class="left">
+                <img src="~/Home/assets/logo/logomain.png" alt="Company Logo">
+                <h2>Rent Car</h2>
+            </div>
+            <div class="right">
+                <li><a href="#become-a-renter">Become a Renter</a></li>
+                <li><a href="#rental-deals">Rental Deals</a></li>
+                <li><a href="#how-it-works">How it Works</a></li>
+                <li><a href="#why-choose-us">Why Choose Us</a></li>
+                <li><a href="#"><button>Login / Register</button></a></li>
+            </div>
+            <div class="hamburger">&#9776;</div>
+        </nav>
+    </div>
+    <section class="section1">
+        <div class="main-content">
+            <div class="hero">
+                <h1>Find, Book, and </h1>
+                <h1><span>Rent a Car</span> in Easy Steps.</h1>
+                <p>Get a car whenever and wherever you need it with your iOS or Android device.</p>
+            </div>
+            <div class="spac"></div>
+
+        </div>
+
+        <div id="progress-container">
+            <div id="progress">
+                <svg class="pl" width="128px" height="128px" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+                    <circle class="pl__ring1" cx="64" cy="64" r="60" fill="none" stroke="hsl(3,90%,55%)" stroke-width="8" transform="rotate(-90,64,64)" stroke-linecap="round" stroke-dasharray="377 377" stroke-dashoffset="-376.4"></circle>
+                    <circle class="pl__ring2" cx="64" cy="64" r="52.5" fill="none" stroke="hsl(13,90%,55%)" stroke-width="7" transform="rotate(-90,64,64)" stroke-linecap="round" stroke-dasharray="329.9 329.9" stroke-dashoffset="-329.3"></circle>
+                    <circle class="pl__ring3" cx="64" cy="64" r="46" fill="none" stroke="hsl(23,90%,55%)" stroke-width="6" transform="rotate(-90,64,64)" stroke-linecap="round" stroke-dasharray="289 289" stroke-dashoffset="-288.6"></circle>
+                    <circle class="pl__ring4" cx="64" cy="64" r="40.5" fill="none" stroke="hsl(33,90%,55%)" stroke-width="5" transform="rotate(-90,64,64)" stroke-linecap="round" stroke-dasharray="254.5 254.5" stroke-dashoffset="-254"></circle>
+                    <circle class="pl__ring5" cx="64" cy="64" r="36" fill="none" stroke="hsl(43,90%,55%)" stroke-width="4" transform="rotate(-90,64,64)" stroke-linecap="round" stroke-dasharray="226.2 226.2" stroke-dashoffset="-225.8"></circle>
+                    <circle class="pl__ring6" cx="64" cy="64" r="32.5" fill="none" stroke="hsl(53,90%,55%)" stroke-width="3" transform="rotate(-90,64,64)" stroke-linecap="round" stroke-dasharray="204.2 204.2" stroke-dashoffset="-203.9"></circle>
+                </svg>
+            </div>
+        </div>
+
+        <a href="#" class="btn-arrow btn-arrow-left" title="Previous">Previous</a>
+        <a href="#" class="btn-arrow btn-arrow-right" title="Next">Next</a>
+
+        <div class="mainunder">
+            <div class="filtcontainer">
+                <div class="logofiltcontainer">
+                    <img src="~/Home/assets/images/brandlogo/1.png" alt="Audi Logo">
+                </div>
+                <div class="logofiltcontainer">
+                    <img src="~/Home/assets/images/brandlogo/9.png" alt="Audi Logo">
+                </div>
+                <div class="cont">
+                    <div class="input-group">
+                        <input type="text" id="location" placeholder="Enter pickup Location">
+                    </div>
+                    <div class="input-group">
+                        <input type="date" id="pickup-date" placeholder="PickupDate">
+                    </div>
+                    <div class="input-group">
+                        <input type="date" id="return-date" placeholder="PickupDate">
+                    </div>
+                    <button class="find-car-btn">FIND CAR</button>
+                </div>
+
+                <div class="logofiltcontainer">
+                    <img src="~/Home/assets/images/brandlogo/5.png" alt="Audi Logo">
+                </div>
+                <div class="logofiltcontainer">
+                    <img src="~/Home/assets/images/brandlogo/7.png" alt="Audi Logo">
+                </div>
+            </div>
+        </div>
+        <div id="3DObjectContainer"></div>
+        <script type="module" src="~/Home/assets/js/main.js"></script>
+    </section>
+    <section class="section2">
+        <div class="gl">
+            <section class="timeline">
+
+                <ul>
+                    <h1 class="project-name">Why Choose Us</h1>
+                    <li>
+                        <div>
+                            <time>Versatile Fleet Selection</time>Explore the road in style with our diverse fleet of vehicles, from sleek sedans to spacious SUVs. Find the perfect ride for every occasion, tailored to your preferences.
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <time>Transparent Pricing</time> Say goodbye to hidden fees! Our straightforward pricing model ensures you know exactly what you're paying for. Enjoy a hassle-free rental experience with no surprises.
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <time>Effortless Booking Process</time> Save time with our user-friendly online reservation system. Booking a car has never been easier just a few clicks, and you're ready to hit the road.
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <time>Top-notch Customer Service:</time> Experience unparalleled support from our dedicated team. We're here for you 24/7, ready to assist with any questions or concerns. Your satisfaction is our priority.
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <time>Meticulous Maintenance Standards</time>Drive with confidence knowing that our vehicles undergo rigorous maintenance checks. Your safety is paramount, and our commitment to quality ensures a reliable and enjoyable journey.
+                        </div>
+                    </li>
+
+                </ul>
+                <script>
+
+                    (function () {
+                        "use strict";
+                        var items = document.querySelectorAll(".timeline li");
+                        function isElementInViewport(el) {
+                            var rect = el.getBoundingClientRect();
+                            return (
+                                rect.top >= 0 &&
+                                rect.left >= 0 &&
+                                rect.bottom <=
+                                (window.innerHeight || document.documentElement.clientHeight) &&
+                                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+                            );
+                        }
+
+                        function callbackFunc() {
+                            for (var i = 0; i < items.length; i++) {
+                                if (isElementInViewport(items[i])) {
+                                    items[i].classList.add("in-view");
+                                }
+                            }
+                        }
+
+                        // listen for events
+                        window.addEventListener("load", callbackFunc);
+                        window.addEventListener("resize", callbackFunc);
+                        window.addEventListener("scroll", callbackFunc);
+                    })();
+
+                </script>
+            </section>
+
+
+
+
+        </div>
+
+    </section>
+    <section class="section6">
+        <div class="slidcont">
+
+            <div class="slider">
+                <div class="slide-track">
+                    <div class="slide">
+                        <img src="~/Home/assets/images/brandlogo/1.png" height="100" width="150" alt="" />
+                    </div>
+                    <div class="slide">
+                        <img src="~/Home/assets/images/brandlogo/2.png" height="100" width="150" alt="" />
+                    </div>
+                    <div class="slide">
+                        <img src="~/Home/assets/images/brandlogo/3.png" height="100" width="150" alt="" />
+                    </div>
+                    <div class="slide">
+                        <img src="~/Home/assets/images/brandlogo/4.png" height="100" width="150" alt="" />
+                    </div>
+                    <div class="slide">
+                        <img src="~/Home/assets/images/brandlogo/5.png" height="100" width="150" alt="" />
+                    </div>
+                    <div class="slide">
+                        <img src="~/Home/assets/images/brandlogo/6.png" height="100" width="150" alt="" />
+                    </div>
+                    <div class="slide">
+                        <img src="~/Home/assets/images/brandlogo/7.png" height="100" width="150" alt="" />
+                    </div>
+                    <div class="slide">
+                        <img src="~/Home/assets/images/brandlogo/9.png" height="100" width="150" alt="" />
+                    </div>
+                    <div class="slide">
+                        <img src="~/Home/assets/images/brandlogo/10.png" height="100" width="150" alt="" />
+                    </div>
+                    <div class="slide">
+                        <img src="~/Home/assets/images/brandlogo/11.png" height="100" width="150" alt="" />
+                    </div>
+                    <div class="slide">
+                        <img src="~/Home/assets/images/brandlogo/12.png" height="100" width="150" alt="" />
+                    </div>
+                    <div class="slide">
+                        <img src="~/Home/assets/images/brandlogo/13.png" height="100" width="150" alt="" />
+                    </div>
+                    <div class="slide">
+                        <img src="~/Home/assets/images/brandlogo/14.png" height="100" width="150" alt="" />
+                    </div>
+                    <div class="slide">
+                        <img src="~/Home/assets/images/brandlogo/15.png" height="100" width="150" alt="" />
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <section class="section3">
+        <div class="client">
+            <h2>Hear what our customers says</h2>
+            <h1>What Customers Say</h1>
+            <div class="client-slider">
+                <ul id="flexiselDemo1">
+                    <li>
+                        <div class="client-item">
+                            <div class="client-img">
+                                <img src="~/Home/assets/images/clients/c1.png" alt="Kidus Mesfin" />
+                            </div>
+                            <div class='client-info'>
+                                <p><span>Kidus Mesfin</span></p>
+                                <span>
+                                    <div class="stars-container">
+                                        <div class="rating-text">5.0</div>
+                                        <div class="stars">
+                                            <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                            </svg>
+                                            <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                            </svg>
+                                            <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                            </svg>
+                                            <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                            </svg>
+                                            <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                            </svg>
+                                        </div>
+
+                                    </div>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="testimonial">
+                            <p><i>"The car rental service provided by Company 1 is exceptional. The fleet is diverse, well-maintained, and the customer service is top-notch. It's the best choice for all my travel needs."</i></p>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="client-item">
+                            <div class="client-img">
+                                <img src="~/Home/assets/images/clients/c1.png" alt="Kedir Jemal" />
+                            </div>
+                            <div class='client-info'>
+                                <p><span>Kedir Jemal</span></p>
+                                <span>
+                                    <div class="stars-container">
+                                        <div class="rating-text">4.9</div>
+                                        <div class="stars">
+                                            <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                            </svg>
+                                            <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                            </svg>
+                                            <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                            </svg>
+                                            <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                            </svg>
+                                            <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                            </svg>
+                                        </div>
+
+                                    </div>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="testimonial">
+                            <p><i>"I've tried several car rental services, but Company 2 stands out. The quality of vehicles, reasonable pricing, and the ease of booking make it the best choice for any traveler."</i></p>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="client-item">
+                            <div class="client-img">
+                                <img src="~/Home/assets/images/clients/c1.png" alt="Sara H/michael" />
+                            </div>
+                            <div class='client-info'>
+                                <p><span>Sara H/michael</span></p>
+                                <span>
+                                    <div class="stars-container">
+                                        <div class="rating-text">5.0</div>
+                                        <div class="stars">
+                                            <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                            </svg>
+                                            <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                            </svg>
+                                            <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                            </svg>
+                                            <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                            </svg>
+                                            <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                            </svg>
+                                        </div>
+
+                                    </div>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="testimonial">
+                            <p><i>"Choosing Company 3 for car rentals is a no-brainer. The service is reliable, the vehicles are in excellent condition, and the seamless rental process makes it the best option for any journey."</i></p>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="client-item">
+                            <div class="client-img">
+                                <img src="~/Home/assets/images/clients/c1.png" alt="Abel Tesfaye" />
+                            </div>
+                            <div class='client-info'>
+                                <p><span>Abel Tesfaye</span></p>
+                                <span>
+                                    <div class="stars-container">
+                                        <div class="rating-text">4.8</div>
+                                        <div class="stars">
+                                            <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                            </svg>
+                                            <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                            </svg>
+                                            <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                            </svg>
+                                            <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                            </svg>
+                                            <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                            </svg>
+                                        </div>
+
+                                    </div>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="testimonial">
+                            <p><i>"The car rental service provided by Company 1 is exceptional. The fleet is diverse, well-maintained, and the customer service is top-notch. It's the best choice for all my travel needs."</i></p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+
+
+        </div>
+    </section>
+    <section class="section5">
+        <div class="wrapper" style="position: relative; bottom: 120px;">
+            <div class="content">
+                <div class="bg-shape">
+                    <img src="" alt="" style="position: relative;left: 20px;">
+                </div>
+
+                <div class="product-img">
+                    <div class="product-img__item" id="img1">
+                        <img src="~/Home/bugatti.png" alt="star wars" class="product-img__img">
+                    </div>
+                    <div class="product-img__item" id="img2">
+                        <img src="~/Home/bugatti.png" alt="star wars" class="product-img__img">
+                    </div>
+                    <div class="product-img__item" id="img3">
+                        <img src="~/Home/bugatti.png" alt="star wars" class="product-img__img">
+                    </div>
+                    <div class="product-img__item" id="img4">
+                        <img src="~/Home/bugatti.png" alt="star wars" class="product-img__img">
+                    </div>
+                </div>
+
+
+
+                <div class="product-slider">
+                    <button class="prev disabled">
+                        <span class="icon">
+                            <svg class="icon icon-arrow-right"><use xlink:href="#icon-arrow-left"></use></svg>
+                        </span>
+                    </button>
+                    <button class="next">
+                        <span class="icon">
+                            <svg class="icon icon-arrow-right"><use xlink:href="#icon-arrow-right"></use></svg>
+                        </span>
+                    </button>
+
+                    <div class="product-slider__wrp swiper-wrapper">
+                        <div class="product-slider__item swiper-slide" data-target="img1">
+                            <div class="product-slider__card">
+                                <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1536405222/starwars/item-1-bg.webp" alt="star wars" class="product-slider__cover">
+                                <div class="product-slider__content">
+                                    <h1 class="product-slider__title">
+                                        BUGATTI <br>
+                                        CHIRON
+                                    </h1>
+                                    <span class="product-slider__price">$254,000,<sup>99</sup></span>
+                                    <div class="product-ctr">
+                                        <div class="product-labels">
+                                            <div class="product-labels__title">AUTOMATIC</div>
+
+                                            <div class="product-labels__group">
+                                                <label class="product-labels__item">
+                                                    <input type="checkbox" class="product-labels__checkbox" name="type1" checked="">
+                                                    <span class="product-labels__txt">5 seats</span>
+                                                </label>
+
+                                                <label class="product-labels__item">
+                                                    <input type="radio" class="product-labels__checkbox" name="type1">
+                                                    <span class="product-labels__txt">2 bags</span>
+                                                </label>
+                                            </div>
+
+                                        </div>
+
+                                        <span class="hr-vertical"></span>
+
+                                        <div class="product-inf">
+                                            <div class="product-inf__percent">
+                                                <div class="product-inf__percent-circle">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+                                                        <defs>
+                                                            <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                                                <stop offset="0%" stop-color="#0c1e2c" stop-opacity="0" />
+                                                                <stop offset="100%" stop-color="#cb2240" stop-opacity="1" />
+                                                            </linearGradient>
+                                                        </defs>
+                                                        <circle cx="50" cy="50" r="47" stroke-dasharray="225, 300" stroke="#cb2240" stroke-width="4" fill="none" />
+                                                    </svg>
+                                                </div>
+                                                <div class="product-inf__percent-txt">
+                                                    75%
+                                                </div>
+                                            </div>
+
+                                            <span class="product-inf__title">RATING</span>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="product-slider__bottom">
+                                        <button class="product-slider__cart">
+                                            Book now
+                                        </button>
+
+                                        <button class="product-slider__fav js-fav"><span class="heart"></span> ADD TO WISHLIST</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="product-slider__item swiper-slide" data-target="img2">
+                            <div class="product-slider__card">
+                                <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1536405222/starwars/item-1-bg.webp" alt="star wars" class="product-slider__cover">
+                                <div class="product-slider__content">
+                                    <h1 class="product-slider__title">
+                                        BUGATTI <br>
+                                        CHIRON
+                                    </h1>
+                                    <span class="product-slider__price">$254,000,<sup>99</sup></span>
+                                    <div class="product-ctr">
+                                        <div class="product-labels">
+                                            <div class="product-labels__title">AUTOMATIC</div>
+
+                                            <div class="product-labels__group">
+                                                <label class="product-labels__item">
+                                                    <input type="checkbox" class="product-labels__checkbox" name="type1" checked="">
+                                                    <span class="product-labels__txt">5 seats</span>
+                                                </label>
+
+                                                <label class="product-labels__item">
+                                                    <input type="radio" class="product-labels__checkbox" name="type1">
+                                                    <span class="product-labels__txt">2 bags</span>
+                                                </label>
+                                            </div>
+
+                                        </div>
+
+                                        <span class="hr-vertical"></span>
+
+                                        <div class="product-inf">
+                                            <div class="product-inf__percent">
+                                                <div class="product-inf__percent-circle">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+                                                        <defs>
+                                                            <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                                                <stop offset="0%" stop-color="#0c1e2c" stop-opacity="0" />
+                                                                <stop offset="100%" stop-color="#cb2240" stop-opacity="1" />
+                                                            </linearGradient>
+                                                        </defs>
+                                                        <circle cx="50" cy="50" r="47" stroke-dasharray="225, 300" stroke="#cb2240" stroke-width="4" fill="none" />
+                                                    </svg>
+                                                </div>
+                                                <div class="product-inf__percent-txt">
+                                                    75%
+                                                </div>
+                                            </div>
+
+                                            <span class="product-inf__title">RATING</span>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="product-slider__bottom">
+                                        <button class="product-slider__cart">
+                                            Book now
+                                        </button>
+
+                                        <button class="product-slider__fav js-fav"><span class="heart"></span> ADD TO WISHLIST</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="product-slider__item swiper-slide" data-target="img3">
+                            <div class="product-slider__card">
+                                <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1536405222/starwars/item-1-bg.webp" alt="star wars" class="product-slider__cover">
+                                <div class="product-slider__content">
+                                    <h1 class="product-slider__title">
+                                        BUGATTI <br>
+                                        CHIRON
+                                    </h1>
+                                    <span class="product-slider__price">$254,000,<sup>99</sup></span>
+                                    <div class="product-ctr">
+                                        <div class="product-labels">
+                                            <div class="product-labels__title">AUTOMATIC</div>
+
+                                            <div class="product-labels__group">
+                                                <label class="product-labels__item">
+                                                    <input type="checkbox" class="product-labels__checkbox" name="type1" checked>
+                                                    <span class="product-labels__txt">5 seats</span>
+                                                </label>
+
+                                                <label class="product-labels__item">
+                                                    <input type="radio" class="product-labels__checkbox" name="type1">
+                                                    <span class="product-labels__txt">2 bags</span>
+                                                </label>
+                                            </div>
+
+                                        </div>
+
+                                        <span class="hr-vertical"></span>
+
+                                        <div class="product-inf">
+                                            <div class="product-inf__percent">
+                                                <div class="product-inf__percent-circle">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+                                                        <defs>
+                                                            <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                                                <stop offset="0%" stop-color="#0c1e2c" stop-opacity="0" />
+                                                                <stop offset="100%" stop-color="#cb2240" stop-opacity="1" />
+                                                            </linearGradient>
+                                                        </defs>
+                                                        <circle cx="50" cy="50" r="47" stroke-dasharray="225, 300" stroke="#cb2240" stroke-width="4" fill="none" />
+                                                    </svg>
+                                                </div>
+                                                <div class="product-inf__percent-txt">
+                                                    75%
+                                                </div>
+                                            </div>
+
+                                            <span class="product-inf__title">RATING</span>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="product-slider__bottom">
+                                        <button class="product-slider__cart">
+                                            Book now
+                                        </button>
+
+                                        <button class="product-slider__fav js-fav"><span class="heart"></span> ADD TO WISHLIST</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="product-slider__item swiper-slide" data-target="img4">
+                            <div class="product-slider__card">
+                                <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1536405222/starwars/item-1-bg.webp" alt="star wars" class="product-slider__cover">
+                                <div class="product-slider__content">
+                                    <h1 class="product-slider__title">
+                                        BUGATTI <br>
+                                        CHIRON
+                                    </h1>
+                                    <span class="product-slider__price">$254,000,<sup>99</sup></span>
+                                    <div class="product-ctr">
+                                        <div class="product-labels">
+                                            <div class="product-labels__title">AUTOMATIC</div>
+
+                                            <div class="product-labels__group">
+                                                <label class="product-labels__item">
+                                                    <input type="radio" class="product-labels__checkbox" name="type1" checked>
+                                                    <span class="product-labels__txt">5 seats</span>
+                                                </label>
+
+                                                <label class="product-labels__item">
+                                                    <input type="radio" class="product-labels__checkbox" name="type1">
+                                                    <span class="product-labels__txt">2 bags</span>
+                                                </label>
+                                            </div>
+
+                                        </div>
+
+                                        <span class="hr-vertical"></span>
+
+                                        <div class="product-inf">
+                                            <div class="product-inf__percent">
+                                                <div class="product-inf__percent-circle">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+                                                        <defs>
+                                                            <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                                                <stop offset="0%" stop-color="#0c1e2c" stop-opacity="0" />
+                                                                <stop offset="100%" stop-color="#cb2240" stop-opacity="1" />
+                                                            </linearGradient>
+                                                        </defs>
+                                                        <circle cx="50" cy="50" r="47" stroke-dasharray="225, 300" stroke="#cb2240" stroke-width="4" fill="none" />
+                                                    </svg>
+                                                </div>
+                                                <div class="product-inf__percent-txt">
+                                                    75%
+                                                </div>
+                                            </div>
+
+                                            <span class="product-inf__title">RATING</span>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="product-slider__bottom">
+                                        <button class="product-slider__cart">
+                                            Book now
+                                        </button>
+
+                                        <button class="product-slider__fav js-fav"><span class="heart"></span> ADD TO WISHLIST</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                        <!--HERE-->
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <svg class="hidden" style="display: none;">
+            <symbol id="icon-arrow-left" viewBox="0 0 32 32">
+                <path d="M0.704 17.696l9.856 9.856c0.896 0.896 2.432 0.896 3.328 0s0.896-2.432 0-3.328l-5.792-5.856h21.568c1.312 0 2.368-1.056 2.368-2.368s-1.056-2.368-2.368-2.368h-21.568l5.824-5.824c0.896-0.896 0.896-2.432 0-3.328-0.48-0.48-1.088-0.704-1.696-0.704s-1.216 0.224-1.696 0.704l-9.824 9.824c-0.448 0.448-0.704 1.056-0.704 1.696s0.224 1.248 0.704 1.696z"></path>
+            </symbol>
+            <symbol id="icon-arrow-right" viewBox="0 0 32 32">
+                <path d="M31.296 14.336l-9.888-9.888c-0.896-0.896-2.432-0.896-3.328 0s-0.896 2.432 0 3.328l5.824 5.856h-21.536c-1.312 0-2.368 1.056-2.368 2.368s1.056 2.368 2.368 2.368h21.568l-5.856 5.824c-0.896 0.896-0.896 2.432 0 3.328 0.48 0.48 1.088 0.704 1.696 0.704s1.216-0.224 1.696-0.704l9.824-9.824c0.448-0.448 0.704-1.056 0.704-1.696s-0.224-1.248-0.704-1.664z"></path>
+            </symbol>
+        </svg>
+
+
+
+    </section>
+    <section class="section4">
+        <section class="contact" id="contact">
+
+            <h1 class="heading"><span>Contact</span> Us</h1>
+
+            <div class="row">
+
+                <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15761.479367471884!2d38.7620324!3d9.0299865!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b844b428bd1d9%3A0x2439574d6dcdd0e0!2sHiLCoE%20School%20of%20Computer%20Science%20and%20Technology!5e0!3m2!1sen!2set!4v1707442569839!5m2!1sen!2set" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <form action="">
+                    <h3>Get In Touch</h3>
+                    <input type="text" placeholder="Your name" class="box">
+                    <input type="email" placeholder="Your email" class="box">
+                    <input type="tel" placeholder="Subject" class="box">
+                    <textarea placeholder="Your message" class="box" cols="30" rows="10"></textarea>
+                    <input type="submit" value="Send Message" class="find-car-btn">
+                </form>
+
+            </div>
+
+        </section>
+
+    </section>
+
+
+
+
+
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.5/js/swiper.min.js'></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const hamburger = document.querySelector('.hamburger');
+            const navigation = document.querySelector('.right');
+
+            hamburger.addEventListener('click', function () {
+                navigation.classList.toggle('show');
+            });
+        });
+    </script>
+
+    <script>
+        var swiper = new Swiper('.product-slider', {
+            spaceBetween: 30,
+            effect: 'fade',
+            // initialSlide: 2,
+            loop: false,
+            navigation: {
+                nextEl: '.next',
+                prevEl: '.prev'
+            },
+            // mousewheel: {
+            //     // invert: false
+            // },
+            on: {
+                init: function () {
+                    var index = this.activeIndex;
+
+                    var target = $('.product-slider__item').eq(index).data('target');
+
+                    console.log(target);
+
+                    $('.product-img__item').removeClass('active');
+                    $('.product-img__item#' + target).addClass('active');
+                }
+            }
+        });
+
+        swiper.on('slideChange', function () {
+            var index = this.activeIndex;
+
+            var target = $('.product-slider__item').eq(index).data('target');
+
+            console.log(target);
+
+            $('.product-img__item').removeClass('active');
+            $('.product-img__item#' + target).addClass('active');
+
+            if (swiper.isEnd) {
+                $('.prev').removeClass('disabled');
+                $('.next').addClass('disabled');
+            } else {
+                $('.next').removeClass('disabled');
+            }
+
+            if (swiper.isBeginning) {
+                $('.prev').addClass('disabled');
+            } else {
+                $('.prev').removeClass('disabled');
+            }
+        });
+
+        $(".js-fav").on("click", function () {
+            $(this).find('.heart').toggleClass("is-active");
+        });
+    </script>
+</body>
+</html>

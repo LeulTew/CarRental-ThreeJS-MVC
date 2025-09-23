@@ -1,0 +1,177 @@
+﻿@using Carrental.Models;
+@model AppUser
+
+@{
+    ViewData["Title"] = "Settings";
+}
+
+<link rel="stylesheet" href="~/css/Setting.css" />
+
+<h1>User Settings</h1>
+
+<div class="dynamic-container">
+    <input class="Dynamictab Dynamictab--1" id="Dynamictab1" name="Dynamictab" type="radio" checked />
+    <label for="Dynamictab1" class="Dynamictab_label">Profile</label>
+
+    <input class="Dynamictab Dynamictab--2" id="Dynamictab2" name="Dynamictab" type="radio" />
+    <label for="Dynamictab2" class="Dynamictab_label">History</label>
+
+    <input class="Dynamictab Dynamictab--3" id="Dynamictab3" name="Dynamictab" type="radio" />
+    <label for="Dynamictab3" class="Dynamictab_label">Update</label>
+
+    <div class="Dindicator"></div>
+    <div class="scroller"></div>
+
+
+
+</div>
+
+<!-- Content for each tab -->
+<div class="tab-content">
+    <div class="tab-pane tab-pane--1">
+        <div class="Personalcard">
+			<p class="card-title">Profile Information</p>
+			<p class="col-sm-3">Username:</p>
+			<p class="small-desc">@Model.UserName</p>
+
+			<p class="col-sm-3">Email:</p>
+			<p class="small-desc">@Model.Email</p>
+
+			<p class="col-sm-3">Full Name:</p>
+			<p class="small-desc">@Model.FullName</p>
+
+			<p class="col-sm-3">Phone:</p>
+			<p class="small-desc">@Model.Phone</p>
+			<div class="go-corner">
+				<div class="go-arrow">→</div>
+			</div>
+			<hr />
+
+		</div>
+	</div>
+
+    <div class="tab-pane tab-pane--2">
+        <h3>Booking History</h3>
+        <div class="booking-list">
+            @if (ViewBag.BookingDetails != null && ViewBag.BookingDetails.Count > 0)
+            {
+                foreach (var item in ViewBag.BookingDetails)
+                {
+                    var booking = (Booking)item.Item1;
+                    var car = (Car)item.Item2;
+                    <div class="booking-item">
+                        <div class="car-info">
+                            <strong>@car.Make @car.Model @car.Year</strong>
+                            <span class="car-image"><img src="@car.ImageUrl" alt="@car.Make @car.Model" /></span>
+                        </div>
+                        <div class="booking-details">
+                            <div><strong>Rental Start Date:</strong> @booking.RentalStartDate</div>
+                            <div><strong>Rental End Date:</strong> @booking.RentalEndDate</div>
+                            <div><strong>Total Amount:</strong> @booking.TotalAmount</div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>No bookings found.</p>
+            }
+        </div>
+    </div>
+
+
+
+    <div class="tab-pane tab-pane--3">
+        <!-- Edit User -->
+        <div class="edit-user">
+            <div class="edit-user-form">
+                <partial name="~/Views/Admin/Update.cshtml" model="@Model" />
+            </div>
+        </div>
+
+        <!-- Delete User -->
+        <div class="delete-user">
+            <button type="button" class="noselect" onclick="confirmDelete()">
+                    <span id="text">Delete</span>
+                    <span class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"></path>
+                        </svg>
+                    </span>
+            </button>
+        </div>
+
+        <!-- Confirmation Modal -->
+        <div id="delete-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <p class="confirmation-text">Are you sure you want to delete your account?</p>
+                <div class="button-container">
+                    <button type="button" onclick="deleteUser()" class="delete-button">Yes, Delete</button>
+                    <button type="button" onclick="closeModal()" class="cancel-button">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+
+
+</div>
+
+
+
+<script>
+    // Get all radio buttons and corresponding tab panes
+    const tabs = document.querySelectorAll('.Dynamictab');
+    const tabContents = document.querySelectorAll('.tab-pane');
+
+    // Add event listener to each radio button
+    tabs.forEach(tab => {
+        tab.addEventListener('change', function () {
+            // Hide all tab panes
+            tabContents.forEach(content => {
+                content.style.display = 'none';
+            });
+
+            // Get the index of the selected tab
+            const selectedIndex = Array.from(tabs).indexOf(this);
+
+            // Show the corresponding tab pane
+            tabContents[selectedIndex].style.display = 'block';
+        });
+    });
+
+    // Initially hide all tab panes except the first one
+    tabContents.forEach((content, index) => {
+        if (index !== 0) {
+            content.style.display = 'none';
+        }
+    });
+
+    // Initially select the first tab
+    tabs[0].checked = true;
+
+
+
+    function confirmDelete() {
+        var modal = document.getElementById("delete-modal");
+        modal.style.display = "block";
+    }
+
+    function closeModal() {
+        var modal = document.getElementById("delete-modal");
+        modal.style.display = "none";
+    }
+
+    function deleteUser() {
+        var userId = '@Model.Id';
+
+        // Construct the URL with the Id parameter
+        var deleteUrl = '@Url.Action("Delete", "Admin", new { Id = "__id__" })'
+            .replace('__id__', userId);
+
+        // Redirect to the deleteUrl
+        window.location.href = deleteUrl;
+    }
+</script>
+
+

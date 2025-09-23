@@ -1,0 +1,571 @@
+﻿@using Carrental.Models;
+@using System.Security.Claims
+
+@model CarDetailsViewModel
+
+<link rel="stylesheet" href="~/css/Details.css">
+
+<!-- Car Details Section -->
+<section class="car-details-section">
+    <div class="car-details-container">
+        <h3 class="car-details-heading">Car Details</h3>
+        <div class="row">
+            <div class="col-md-6">
+                <!-- Car Images Carousel -->
+                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                    <!-- Carousel Indicators -->
+                    <div class="carousel-indicators">
+                        @for (int i = 0; i < Model.Car.Images.Count; i++)
+                        {
+                            <button type="button" data-bs-target="#carouselExampleIndicators"
+                                    data-bs-slide-to="@i" class="@(i == 0 ? "active" : "")"
+                                    aria-current="true" aria-label="Slide @(i+1)"></button>
+                        }
+                    </div>
+                    <!-- Carousel Inner -->
+                    <div class="carousel-inner">
+                        @for (int i = 0; i < Model.Car.Images.Count; i++)
+                        {
+                            <div class="@(i == 0 ? "carousel-item active" : "carousel-item")">
+                                <img src="@Model.Car.Images[i].ImageUrl" class="d-block w-100" alt="Car Image @(i+1)">
+                            </div>
+                        }
+                    </div>
+                    <!-- Carousel Controls -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <!-- Car Details -->
+                <div class="car-details-content">
+                    <div class="car-detail">
+                        <span class="detail-label">Brand:</span>
+                        <span class="detail-value">@Model.Car.Make</span>
+                    </div>
+                    <div class="car-detail">
+                        <span class="detail-label">Model:</span>
+                        <span class="detail-value">@Model.Car.Model</span>
+                    </div>
+                    <div class="car-detail">
+                        <span class="detail-label">Year:</span>
+                        <span class="detail-value">@Model.Car.Year</span>
+                    </div>
+                    <!-- Additional Details -->
+                    @if (!string.IsNullOrEmpty(Model.Car.Color))
+                    {
+                        <div class="car-detail">
+                            <span class="detail-label">Color:</span>
+                            <span class="detail-value">@Model.Car.Color</span>
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Car.Condition))
+                    {
+                        <div class="car-detail">
+                            <span class="detail-label">Condition:</span>
+                            <span class="detail-value">@Model.Car.Condition</span>
+                        </div>
+                    }
+                    <!-- Rent Price Per Hour -->
+                    <div class="car-detail">
+                        <span class="detail-label">Rent Price Per Hour:</span>
+                        <span class="detail-value">@Model.Car.RentPricePerHour</span>
+                    </div>
+                    <!-- Sale Price (If Available) -->
+                    @if (Model.Car.SalePrice.HasValue)
+                    {
+                        <div class="car-detail">
+                            <span class="detail-label">Sale Price:</span>
+                            <span class="detail-value">@Model.Car.SalePrice</span>
+                        </div>
+                    }
+                    <!-- Car Type -->
+                    <div class="car-detail">
+                        <span class="detail-label">Car Type:</span>
+                        <span class="detail-value">@Model.Car.CarType</span>
+                    </div>
+                    <!-- Car Status and Specifications -->
+                    <!-- Specifications -->
+                    @if (!string.IsNullOrEmpty(Model.Car.Specifications))
+                    {
+                        <div class="car-specifications">
+                            <h4 class="specifications-heading">Specifications</h4>
+                            <div class="specifications-content">
+                                @Html.Raw(Model.Car.Specifications)
+                            </div>
+                        </div>
+                    }
+                </div>
+                    <div class="car-details">
+                        <!-- Car Status -->
+                        <div class="car-status">
+                            <h4 class="status-heading">Car Status</h4>
+                            <div class="status-container">
+                            @if (Model.Car.IsNew && !(Model.Car.IsBooked) && !(Model.Car.IsForSale))
+                            {
+                                <div class="status-item new">
+                                    <span class="status-label">New</span>
+                                </div>
+                            }
+                                @if (Model.Car.IsBooked)
+                                {
+                                    <div class="status-item booked">
+                                        <span class="status-label">Booked</span>
+                                    </div>
+                                }
+
+                                @if (Model.Car.IsForSale)
+                                {
+                                    <div class="status-item for-sale">
+                                        <span class="status-label">For Sale</span>
+                                </div>
+                                }
+                                @if (!(Model.Car.IsBooked || Model.Car.IsNew || Model.Car.IsForSale))
+                                {
+                                    <div class="status-item for-sale">
+                                        <span class="status-label">Available</span>
+                                    </div>
+                                }
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<section class="containerRent">
+
+@if (Model.Car.IsForSale)
+{
+        int i = 1;
+    <div class='carBuy'>
+        @foreach (var version in Model.Car.Versions)
+        {
+                if (i == 1)
+                {
+                    <section class='card'>
+                        <div class='card_inner'>
+                            <div class='card_inner__circle'>
+                                <img src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/217233/rocket.png'>
+                            </div>
+                            <div class='card_inner__header'>
+                                <img src='http://www.pixeden.com/media/k2/galleries/343/002-city-vector-background-town-vol2.jpg'>
+                            </div>
+                            <div class='card_inner__content'>
+                                <div class='title'>@version.Name</div>
+                                <div class='price'>Br. @version.Price.ToString("N2")</div>
+                                <div class='text'>@version.Description</div>
+                            </div>
+                            <div class='card_inner__cta'>
+                                <form method='post' asp-action='BuyNow' asp-controller='Car'>
+                                    <input type='hidden' name='carId' value='@Model.Car.CarId' />
+                                    <input type='hidden' name='totalAmount' value='@version.Price' />
+                                    <button type='submit'>
+                                        <span>Buy now</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </section>
+                }
+                else if (i == 2)
+                {
+                    <section class='card'>
+                        <div class='card_inner'>
+                            <div class='card_inner__circle'>
+                                <img src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/217233/cog.png'>
+                            </div>
+                            <div class='card_inner__header'>
+                                <img src='https://www.5genergy.ca/wp-content/uploads/2016/01/free-vector-modern-city_093317_bluecity1.jpg'>
+                            </div>
+                            <div class='card_inner__content'>
+                                <div class='title'>@version.Name</div>
+                                <div class='price'>Br. @version.Price.ToString("N2")</div>
+                                <div class='text'>@version.Description</div>
+                            </div>
+                            <div class='card_inner__cta'>
+                                <form method='post' asp-action='BuyNow' asp-controller='Car'>
+                                    <input type='hidden' name='carId' value='@Model.Car.CarId' />
+                                    <input type='hidden' name='totalAmount' value='@version.Price' />
+                                    <button type='submit'>
+                                        <span>Buy now</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </section>
+                }
+                else if(i==3)
+                {
+                    <section class='card'>
+                        <div class='card_inner'>
+                            <div class='card_inner__circle'>
+                                <img src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/217233/paperplane.png'>
+                            </div>
+                            <div class='card_inner__header'>
+                                <img src='https://c7.uihere.com/files/859/510/385/abstract-forest-landscape.jpg'>
+                            </div>
+                            <div class='card_inner__content'>
+                                <div class='title'>@version.Name</div>
+                                <div class='price'>Br. @version.Price.ToString("N2")</div>
+                                <div class='text'>@version.Description</div>
+                            </div>
+                            <div class='card_inner__cta'>
+                                <form method='post' asp-action='BuyNow' asp-controller='Car'>
+                                    <input type='hidden' name='carId' value='@Model.Car.CarId' />
+                                    <input type='hidden' name='totalAmount' value='@version.Price' />
+                                    <button type='submit'>
+                                        <span>Buy now</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </section>
+                }
+                i++;
+            }
+    </div>
+}
+else
+{
+        <div class="RentHeader">
+            <h4>Rental Information</h4>
+            @if (Model.Car.IsBooked && Model.Bookings.Any(b => b.RentalEndDate != null))
+            {
+                var latestBookingEndDate = Model.Bookings.Max(b => b.RentalEndDate);
+                <p>This car is currently booked until @latestBookingEndDate.ToShortDateString().</p>
+                <p>If you agree to pre-book after this date, you can proceed with the rental.</p>
+            }
+        </div>
+        <div class="formRent">
+            <form id="rentalForm" asp-action="Book" asp-controller="Car" method="post">
+                <!-- Hidden fields to pass necessary data to the action -->
+                <input type="hidden" name="carId" value="@Model.Car.CarId" />
+                <input type="hidden" name="totalAmount" id="totalAmountInput" />
+                <!-- Input fields for rental start and end dates -->
+                <div class="form-group">
+                    <label for="rentalStartDate">Rental Start Date:</label>
+                    <input type="date" class="form-control" id="rentalStartDate" name="rentalStartDate"
+                           value="@((Model.Bookings.Any(b => b.RentalEndDate != null)) ? Model.Bookings.Max(b => b.RentalEndDate).AddDays(1).ToString("yyyy-MM-dd") : DateTime.Today.ToString("yyyy-MM-dd"))"
+                           min="@((Model.Bookings.Any(b => b.RentalEndDate != null)) ? Model.Bookings.Max(b => b.RentalEndDate).AddDays(1).ToString("yyyy-MM-dd") : DateTime.Today.ToString("yyyy-MM-dd"))">
+                </div>
+                <div class="form-group">
+                    <label for="rentalEndDate">Rental End Date:</label>
+                    <input type="date" class="form-control" id="rentalEndDate" name="rentalEndDate"
+                           min="@((Model.Bookings.Any(b => b.RentalEndDate != null)) ? Model.Bookings.Max(b => b.RentalEndDate).AddDays(2).ToString("yyyy-MM-dd") : DateTime.Today.AddDays(1).ToString("yyyy-MM-dd"))">
+                </div>
+                <!-- Total Amount -->
+                <div class="form-group">
+                    <h4 class="TotA">Total Amount</h4>
+                    <p id="totalAmount">Br.0.00</p>
+                </div>
+                <!-- Error message for invalid dates (initially hidden) -->
+                <div id="dateErrorMessage" style="color: red; display: none;">Please select proper start and end dates.</div>
+                <!-- Submit button -->
+                <div class="form-proceed">
+                    <button class="learn-more" type="button" id="paymentButton">
+                        <span class="circle" aria-hidden="true">
+                            <span class="icon arrow"></span>
+                        </span>
+                        <span class="button-text">Proceed to Pay</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+}
+
+</section>
+
+
+
+
+@if (User.Identity.IsAuthenticated && Model.Bookings != null && Model.Bookings.Any(b => b.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier)))
+{
+        <div class="cardReview">
+            <span class="titleCom">Leave A Review</span>
+            <div class="text-box">
+                <div class="box-container">
+                    <form asp-action="AddReview" asp-controller="Car" method="post">
+                        <input type="hidden" name="CarId" value="@Model.Car.CarId" />
+                        <textarea placeholder="Reply" name="Comment"></textarea>
+                        
+                        <div>
+                            <div class="formatting">
+                                <button type="button">
+                                    <svg fill="none" viewBox="0 0 24 24" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#707277" d="M5 6C5 4.58579 5 3.87868 5.43934 3.43934C5.87868 3 6.58579 3 8 3H12.5789C15.0206 3 17 5.01472 17 7.5C17 9.98528 15.0206 12 12.5789 12H5V6Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                                        <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#707277" d="M12.4286 12H13.6667C16.0599 12 18 14.0147 18 16.5C18 18.9853 16.0599 21 13.6667 21H8C6.58579 21 5.87868 21 5.43934 20.5607C5 20.1213 5 19.4142 5 18V12"></path>
+                                    </svg>
+                                </button>
+                                <button type="button">
+                                    <svg fill="none" viewBox="0 0 24 24" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-width="2.5" stroke="#707277" d="M12 4H19"></path>
+                                        <path stroke-linecap="round" stroke-width="2.5" stroke="#707277" d="M8 20L16 4"></path>
+                                        <path stroke-linecap="round" stroke-width="2.5" stroke="#707277" d="M5 20H12"></path>
+                                    </svg>
+                                </button>
+                                <button type="button">
+                                    <svg fill="none" viewBox="0 0 24 24" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#707277" d="M5.5 3V11.5C5.5 15.0899 8.41015 18 12 18C15.5899 18 18.5 15.0899 18.5 11.5V3"></path>
+                                        <path stroke-linecap="round" stroke-width="2.5" stroke="#707277" d="M3 21H21"></path>
+                                    </svg>
+                                </button>
+                                <div class="rating">
+                                    <input value="5" name="Rating" id="star5" type="radio">
+                                    <label title="text" for="star5"></label>
+                                    <input value="4" name="Rating" id="star4" type="radio">
+                                    <label title="text" for="star4"></label>
+                                    <input value="3" name="Rating" id="star3" type="radio" checked="">
+                                    <label title="text" for="star3"></label>
+                                    <input value="2" name="Rating" id="star2" type="radio">
+                                    <label title="text" for="star2"></label>
+                                    <input value="1" name="Rating" id="star1" type="radio">
+                                    <label title="text" for="star1"></label>
+                                </div>
+                                <button type="submit" class="send" title="Send">
+                                    <svg fill="none" viewBox="0 0 24 24" height="18" width="18" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#ffffff" d="M12 5L12 20"></path>
+                                        <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#ffffff" d="M7 9L11.2929 4.70711C11.6262 4.37377 11.7929 4.20711 12 4.20711C12.2071 4.20711 12.3738 4.37377 12.7071 4.70711L17 9"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    }
+
+
+    @{
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        var isFavorite = Model.Favorites.Any(f => f.UserId == userId && f.CarId == Model.Car.CarId);
+    }
+
+    <!-- Favorite Section -->
+    @if (isFavorite)
+    {
+        <div class="row mt-4">
+            <h4>Remove from Favorites</h4>
+            <form id="removeFavoriteForm" asp-action="RemoveFromFavorites" asp-controller="Car" method="post">
+                <input type="hidden" name="CarId" value="@Model.Car.CarId" />
+                    <input type="checkbox" value="favorite-button" name="favorite-checkbox" id="favorite" checked="checked"  />
+            <label class="containerF" onclick="document.getElementById('removeFavoriteForm').submit()">
+                <svg class="feather feather-heart" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                    <div class="action">
+                        <span class="option-2">Remove from Favorites</span>
+                    </div>
+                </label>
+            </form>
+        </div>
+    }
+    else
+    {
+        <div class="row mt-4">
+            <h4>Add to Favorites</h4>
+            <form id="addFavoriteForm" asp-action="AddToFavorites" asp-controller="Car" method="post">
+                <input type="hidden" name="CarId" value="@Model.Car.CarId" />
+                    <input type="checkbox" value="favorite-button" name="favorite-checkbox" id="favorite" style="display: none;" />
+            <label class="containerF" onclick="document.getElementById('addFavoriteForm').submit()">
+                <svg class="feather feather-heart" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                    <div class="action">
+                        <span class="option-1">Add to Favorites</span>
+                    </div>
+                </label>
+            </form>
+        </div>
+    }
+
+</div>
+
+<!-- Review Section -->
+@if (Model.Reviews != null && Model.Reviews.Any())
+{
+    <div class="Reviews">
+        <h4>Reviews</h4>
+        <div class="containerRev">
+            @foreach (var review in Model.Reviews)
+            {
+                <div class="cardRev">
+                    <div class="headerRev">
+                        <div class="imageR"></div>
+                        <div>
+                            <div class="stars">
+                                @for (int i = 0; i < review.Rating; i++)
+                                {
+                                    <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                    </svg>
+                                }
+                            </div>
+                            <p class="name">@review.User.UserName</p>
+                        </div>
+                    </div>
+                    <p class="message">@review.Comment</p>
+                </div>
+            }
+        </div>
+    </div>
+}
+
+<div class="chatbot chatbot--closed">
+    <div class="chatbot__header">
+        <p><strong>Got a question?</strong> <span class="u-text-highlight">Customer Service</span></p>
+        <svg class="chatbot__close-button icon-speech" viewBox="0 0 32 32">
+            <use xlink:href="#icon-speech" />
+        </svg>
+        <svg class="chatbot__close-button icon-close" viewBox="0 0 32 32">
+            <use xlink:href="#icon-close" />
+        </svg>
+    </div>
+    <div class="chatbot__message-window">
+        <ul class="chatbot__messages">
+            <li class="is-ai animation">
+                <div class="is-ai__profile-picture">
+                    <svg class="icon-avatar" viewBox="0 0 32 32">
+                        <use xlink:href="#avatar" />
+                    </svg>
+                </div>
+                <span class="chatbot__arrow chatbot__arrow--left"></span>
+                <p class='chatbot__message'>Hi there 🖐. I’m Nati, your virtual assistant. I'm here to help with your general enquiries.</p>
+            </li>
+            <!-- Answer and response added here -->
+        </ul>
+    </div>
+    <div class="chatbot__entry chatbot--closed">
+        <input type="text" class="chatbot__input" placeholder="Write a message..." />
+        <svg class="chatbot__submit" viewBox="0 0 32 32">
+            <use xlink:href="#icon-send" />
+        </svg>
+    </div>
+</div>
+
+<!-- Symbols -->
+<svg>
+    <!-- Close icon -->
+    <symbol id="icon-close" viewBox="0 0 32 32">
+        <title>Close</title>
+        <path d="M2.624 8.297l2.963-2.963 23.704 23.704-2.963 2.963-23.704-23.704z" />
+        <path d="M2.624 29.037l23.704-23.704 2.963 2.963-23.704 23.704-2.963-2.963z" />
+    </symbol>
+
+    <!-- Speech icon -->
+    <symbol id="icon-speech" viewBox="0 0 32 32">
+        <title>Speech</title>
+        <path d="M21.795 5.333h-11.413c-0.038 0-0.077 0-0.114 0l-0.134 0.011v2.796c0.143-0.006 0.273-0.009 0.385-0.009h11.277c0.070 0 7.074 0.213 7.074 7.695 0 5.179-2.956 7.695-9.036 7.695h-3.792c-0.691 0-1.12 0.526-1.38 1.159l-1.387 3.093-1.625 3.77 0.245 0.453h2.56l2.538-5.678h2.837c7.633 0 11.84-3.727 11.84-10.494 0.001-8.564-7.313-10.492-9.875-10.492z" />
+        <path d="M10.912 24.259c-0.242-0.442-0.703-0.737-1.234-0.737-0 0-0 0-0 0h-0.56c-0.599-0.011-1.171-0.108-1.71-0.28l0.042 0.012c-1.82-0.559-4.427-2.26-4.427-7.424 0-6.683 5.024-7.597 7.109-7.686v-2.8c-2.042 0.095-9.91 1.067-9.91 10.483 0 4.832 1.961 7.367 3.606 8.64 1.38 1.067 3.109 1.744 4.991 1.843l0.033 0.019 2.805 5.211 1.41-3.273z" />
+    </symbol>
+
+    <!-- Send icon -->
+    <symbol id="icon-send" viewBox="0 0 23.97 21.9">
+        <title>Send</title>
+        <path d="M0.31,9.43a0.5,0.5,0,0,0,0,.93l8.3,3.23L23.15,0Z" />
+        <path d="M9,14.6H9V21.4a0.5,0.5,0,0,0,.93.25L13.22,16l6,3.32A0.5,0.5,0,0,0,20,19l4-18.4Z" />
+    </symbol>
+
+    <!-- Avatar icon -->
+    <symbol id="avatar" width="32" height="32" viewBox="0 0 44.25 44">
+        <title>Avatar</title>
+        <path style="fill: #7226e0; fill-rule: evenodd;" d="M1035.88,1696.25a22,22,0,1,1-22.13,22A22.065,22.065,0,0,1,1035.88,1696.25Z" transform="translate(-1013.75 -1696.25)" />
+        <path style="fill: #fff; fill-rule: evenodd;" d="M1030.18,1725.16h2.35a0.335,0.335,0,0,0,.34-0.33v-5.23h5.94v5.23a0.342,0.342,0,0,0,.34.33h2.36a0.342,0.342,0,0,0,.34-0.33v-12.36a0.34,0.34,0,0,0-.34-0.32h-2.36a0.34,0.34,0,0,0-.34.32v4.51h-5.94v-4.51a0.333,0.333,0,0,0-.34-0.32h-2.35a0.333,0.333,0,0,0-.34.32v12.36a0.335,0.335,0,0,0,.34.33" transform="translate(-1013.75 -1696.25)" />
+    </symbol>
+
+</svg>
+
+
+@section Scripts {
+    <script src="~/js/Detail.js"> </script>
+    <script>
+      
+
+
+
+        // Function to calculate total amount
+        function calculateTotalAmount() {
+            // Retrieve rental start and end dates
+            var startDate = document.getElementById('rentalStartDate').value;
+            var endDate = document.getElementById('rentalEndDate').value;
+
+            // Check if both start and end dates are selected
+            if (startDate && endDate) {
+                startDate = new Date(startDate);
+                endDate = new Date(endDate);
+
+                // Calculate duration in hours
+                var durationInHours = (endDate - startDate) / (1000 * 60 * 60);
+
+                // Retrieve rental price per hour from the model
+                var rentalPricePerHour = @Model.Car.RentPricePerHour;
+
+                // Calculate total amount
+                var totalAmount = durationInHours * rentalPricePerHour;
+
+                // Update total amount display
+                document.getElementById('totalAmount').style.display = 'block';
+                document.getElementById('totalAmount').innerText = 'Br.' + totalAmount.toFixed(2);
+
+                // Set the value of hidden input field for total amount
+                document.getElementById('totalAmountInput').value = totalAmount.toFixed(2);
+
+                // Show error message if total amount is less than 0.00
+                if (totalAmount < 0) {
+                    document.getElementById('dateErrorMessage').style.display = 'block';
+                } else {
+                    // Hide error message if total amount is valid
+                    document.getElementById('dateErrorMessage').style.display = 'none';
+                }
+            } else {
+                // If either start or end date is not selected, hide the total amount and show error message
+                document.getElementById('totalAmount').style.display = 'none';
+                // Only show error message when the form is submitted
+                if (submitted) {
+                    document.getElementById('dateErrorMessage').style.display = 'block';
+                }
+            }
+        }
+
+        // Variable to track whether the form has been submitted
+        var submitted = false;
+
+        // Event listener for Proceed to Pay button click
+        document.getElementById('paymentButton').addEventListener('click', function () {
+            // Validate dates before submitting the form
+            calculateTotalAmount();
+            var totalAmount = parseFloat(document.getElementById('totalAmountInput').value);
+            if (!totalAmount || totalAmount === 0) {
+                // Prevent form submission if total amount is not calculated
+                submitted = true;
+                return false;
+            }
+            // Submit the form if total amount is calculated
+            submitted = false;
+            document.getElementById('rentalForm').submit();
+        });
+
+        // Event listeners for Rental Start Date and End Date changes
+        document.getElementById('rentalStartDate').addEventListener('change', calculateTotalAmount);
+        document.getElementById('rentalEndDate').addEventListener('change', calculateTotalAmount);
+
+        // Initially calculate total amount
+        calculateTotalAmount();
+    </script>
+}
+

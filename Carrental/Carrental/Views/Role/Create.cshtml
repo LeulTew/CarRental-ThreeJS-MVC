@@ -1,0 +1,29 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Carrental.Models;
+@model string
+@{
+    ViewData["Title"] = "CREATE ROLE";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/Role - Create.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Create a Role</h1>
+        <a asp-action="Index" class="btn-secondary">Back</a>
+
+        <form asp-action="Create" method="post">
+            <div class="input-wrapper">
+                <input type="text" placeholder="Role Name:" name="name" class="input">
+            </div>
+
+            <button type="submit" class="btn-primary">Create</button>
+        </form>
+    </div>
+</body>
+</html>

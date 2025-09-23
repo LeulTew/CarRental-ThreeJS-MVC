@@ -1,0 +1,400 @@
+﻿@using Carrental.Models;
+@model Carrental.Models.CarViewModel;
+
+@{
+    Layout = "_Layout";
+}
+<style>
+    /* Car Edit Form Styling */
+    .container {
+        min-width: 100%;
+        height: 100%;
+        /* background-color: #ffffff; */
+        background-image: radial-gradient(rgba(12, 12, 12, 0.171) 2px, transparent 0);
+        background-size: 30px 30px;
+        background-position: -5px -5px;
+    }
+
+    /* Form Title */
+    .car-edit-form h4 {
+        text-align: center;
+        font-size: 32px;
+        font-weight: bold;
+        color: #fff;
+        margin-bottom: 30px;
+    }
+
+    /* Form */
+    .car-edit-form {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #1e1e1e;
+        border-radius: 10px;
+    }
+
+        /* Form Group */
+        .car-edit-form .form-group {
+            margin-bottom: 20px;
+            display: flex;
+        }
+
+        /* Label */
+        .car-edit-form .col-form-label {
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        /* Input Fields */
+        .car-edit-form input[type="text"],
+        .car-edit-form input[type="email"],
+        .car-edit-form input[type="password"],
+        .car-edit-form textarea,
+        .car-edit-form select {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            background-color: #2e2e2e;
+            color: #fff;
+        }
+
+            /* Input Focus */
+            .car-edit-form input:focus,
+            .car-edit-form textarea:focus,
+            .car-edit-form select:focus {
+                outline: none;
+                background-color: #3e3e3e;
+            }
+
+        /* Error Message */
+        .car-edit-form .text-danger {
+            color: #FF5252;
+        }
+
+        .car-edit-form input[type="submit"],
+        .car-edit-form button {
+            background-color: transparent;
+            border: 2px solid #000;
+            border-radius: 0;
+            box-sizing: border-box;
+            color: #fff;
+            cursor: pointer;
+            display: inline-block;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            margin: 0 auto; /* Center horizontally */
+            outline: none;
+            overflow: visible;
+            padding: 1.25em 2em;
+            position: relative;
+            text-align: center;
+            text-decoration: none;
+            text-transform: none;
+            transition: all 0.3s ease-in-out;
+            user-select: none;
+            font-size: 13px;
+        }
+
+            /* Submit Button Hover */
+            .car-edit-form input[type="submit"]:hover,
+            .car-edit-form button:hover {
+                color: black;
+                background: #e8e8e8;
+            }
+
+            .car-edit-form button.btn-danger {
+                background-color: transparent;
+                border: 2px solid #000;
+                border-radius: 0;
+                box-sizing: border-box;
+                color: #fff;
+                cursor: pointer;
+                display: inline-block;
+                font-weight: 700;
+                letter-spacing: 0.05em;
+                margin: 0 auto; /* Center horizontally */
+                outline: none;
+                overflow: visible;
+                padding: 1.25em 2em;
+                position: relative;
+                text-align: center;
+                text-decoration: none;
+                text-transform: none;
+                transition: all 0.3s ease-in-out;
+                user-select: none;
+                font-size: 13px;
+            }
+
+                /* Delete Button Hover */
+                .car-edit-form button.btn-danger:hover {
+                    color: black;
+                    background: #e8e8e8;
+                }
+
+
+        /* Back Link */
+    .goBk a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+            /* Back Link Hover */
+    .goBk a:hover {
+                color: #45a049;
+                text-decoration: underline;
+            }
+
+</style>
+<h4>Car Edit Form</h4>
+<hr />
+<form asp-controller="Car" asp-action="Edit" enctype="multipart/form-data" method="post" class="mt-3 car-edit-form">
+    <div class="form-group row">
+        <label asp-for="CarId" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="CarId" class="form-control mb-2" disabled />
+            <span asp-validation-for="CarId" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="Make" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Make" class="form-control mb-2" />
+            <span asp-validation-for="Make" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="Model" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Model" class="form-control mb-2" />
+            <span asp-validation-for="Model" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="Year" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Year" class="form-control mb-2" />
+            <span asp-validation-for="Year" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="Description" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <textarea asp-for="Description" class="form-control mb-2"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="Seats" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Seats" class="form-control mb-2" />
+            <span asp-validation-for="Seats" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="Color" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Color" class="form-control mb-2" />
+            <span asp-validation-for="Color" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="CarType" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <select class="form-control" id="carTypeSelect" asp-for="CarType">
+                <option value="">Select Car Type</option>
+                <option value="Sedan">Sedan</option>
+                <option value="Wagon">Wagon</option>
+                <option value="Van">Van</option>
+                <option value="Minivan">Minivan</option>
+                <option value="Pickup">Pickup</option>
+                <option value="Coupe">Coupe</option>
+                <option value="Hatchback">Hatchback</option>
+            </select>
+            <span asp-validation-for="CarType" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="Condition" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Condition" class="form-control mb-2" />
+            <span asp-validation-for="Condition" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="Image" class="col-sm-2 col-form-label mb-2"></label>
+        <div class="col-sm-10">
+            @if (Model.Image != null)
+            {
+                <img id="selectedImage" src="@Model.Image.FileName" alt="Car Image" style="max-width: 200px; max-height: 200px;" />
+            }
+            <input type="file" id="newCarImage" style="display: none;" asp-for="Image" class="form-control" onchange="displayNewImage(event)" />
+            <button type="button" id="browseButton" class="btn btn-primary">Browse</button>
+            <span asp-validation-for="Image" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="Images" class="col-sm-2 col-form-label mb-2"></label>
+        <div class="col-sm-10" id="selectedImages">
+            @if (Model.Images != null && Model.Images.Count > 0)
+            {
+                @foreach (var image in Model.Images)
+                {
+                    <img src="@image.FileName" alt="Car Images" style="max-width: 200px; max-height: 200px;" />
+                }
+            }
+            <input id="newCarImages" style="display: none;" multiple asp-for="Images" class="form-control" onchange="displayNewImages(event)" />
+            <button type="button" id="browseImagesButton" class="btn btn-primary">Browse</button>
+            <span asp-validation-for="Images" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="RentPricePerHour" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="RentPricePerHour" class="form-control mb-2" />
+            <span asp-validation-for="RentPricePerHour" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="SalePrice" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="SalePrice" class="form-control mb-2" />
+            <span asp-validation-for="SalePrice" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-10">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="IsForSale" asp-for="IsForSale" />
+                <label class="form-check-label" for="IsForSale">
+                    Is For Sale
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="Specifications" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <textarea asp-for="Specifications" class="form-control mb-2"></textarea>
+            <span asp-validation-for="Specifications" class="text-danger"></span>
+        </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="form-group">
+        <input type="submit" value="Edit" class="btn btn-primary bm-2" />
+    </div>
+
+    <div class="form-group">
+        <button type="button" class="btn btn-danger ml-2" onclick="confirmDelete()">Delete Car</button>
+    </div>
+
+    <input type="hidden" asp-for="CarId" />
+</form>
+
+<!-- Hidden form for car deletion -->
+<form id="deleteForm" asp-controller="Car" asp-action="Delete" method="post">
+    <input type="hidden" id="deleteCarId" name="id" />
+</form>
+
+<div>
+    <a asp-controller="Car" asp-action="Index" class="goBk">Back to List</a>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var carTypeSelect = document.getElementById('carTypeSelect');
+            var currentCarType = '@Model.CarType';
+
+            for (var i = 0; i < carTypeSelect.options.length; i++) {
+                if (carTypeSelect.options[i].value === currentCarType) {
+                    carTypeSelect.options[i].selected = true;
+                    break;
+                }
+            }
+        });
+
+        $(document).ready(function () {
+            // Hide file input for images if URLs exist (they cannot be pre-filled)
+            if ('@Model.Image' !== '') {
+                $('input[name="Image"]').hide();
+            }
+        });
+
+        // Function to confirm car deletion
+        function confirmDelete() {
+            if (confirm('Are you sure you want to delete this car?')) {
+                var carId = $('#CarId').val(); // Fetch the car ID
+                $('#deleteCarId').val(carId); // Set the car ID in the hidden form field
+                $('#deleteForm').submit(); // Submit the form for deletion
+            }
+        }
+
+        // Function to display new image
+        function displayNewImage(event) {
+            var input = event.target;
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#selectedImage').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // Function to trigger file input click event
+        $(document).ready(function () {
+            $('#browseButton').click(function () {
+                $('#newCarImage').click(); // Trigger the click event of the hidden file input
+            });
+        });
+
+        // Function to display new images
+        function displayNewImages(event) {
+            var input = event.target;
+            var imagesContainer = $('#selectedImages');
+            // Remove existing images
+            imagesContainer.find('img').remove();
+
+            if (input.files && input.files.length > 0) {
+                for (var i = 0; i < input.files.length; i++) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var image = $('<img />').attr('src', e.target.result).attr('style', 'max-width: 200px; max-height: 200px;');
+                        imagesContainer.prepend(image);
+                    };
+                    reader.readAsDataURL(input.files[i]);
+                }
+            }
+        }
+
+        $(document).ready(function () {
+            $('#browseImagesButton').click(function () {
+                $('#newCarImages').click(); // Trigger the click event of the hidden file input
+            });
+        });
+
+    </script>
+}

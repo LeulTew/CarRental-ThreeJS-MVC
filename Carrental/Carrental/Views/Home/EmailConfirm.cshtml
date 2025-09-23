@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        p {
+            color: #666;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Booking Confirmation</h1>
+        <p>Thank you for renting our car!</p>
+        <p>Your booking details:</p>
+        <ul>
+            <li><strong>Car Make:</strong> {{CarMake}}</li>
+            <li><strong>Car Model:</strong> {{CarModel}}</li>
+            <li><strong>Payment Amount:</strong> {{PaymentAmount}}</li>
+            <li><strong>Payment Date:</strong> {{PaymentDate}}</li>
+            <li><strong>Transaction ID:</strong> {{TransactionId}}</li>
+        </ul>
+        <p>Please pick up your car at:</p>
+        <p>{{PickUpLocation}}</p>
+        <p>Pick-up time: {{PickUpTime}}</p>
+    </div>
+</body>
+</html>

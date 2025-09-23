@@ -1,0 +1,152 @@
+﻿@{
+    Layout = null;
+    var popupShown = Context.Request.Cookies["cookiePopupShown"];
+}
+<style>
+    body {
+        backdrop-filter: blur(5px);
+        background-color: rgba(255, 255, 255, 0.5); /* Adjust background opacity */
+    }
+
+    .blur-background {
+        backdrop-filter: blur(5px);
+        background-color: rgba(255, 255, 255, 0.5); /* Adjust background opacity */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 999; /* Ensure the blur background appears below the popup */
+    }
+
+    /* Centered cookie consent popup */
+    .cookiesContent {
+        width: 320px;
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+        background-color: #fff;
+        color: #000;
+        text-align: center;
+        border-radius: 20px;
+        padding: 30px 25px;
+        position: fixed;
+        top: 50vh;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+    }
+
+        .cookiesContent img {
+            width: 82px;
+            margin-bottom: 15px;
+        }
+
+        .cookiesContent p {
+            margin-bottom: 40px;
+            font-size: 18px;
+        }
+
+        .cookiesContent button.close {
+            width: 30px;
+            font-size: 20px;
+            color: #c0c5cb;
+            align-self: flex-end;
+            background-color: transparent;
+            border: none;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .cookiesContent button.accept {
+            background-color: #ed6755;
+            border: none;
+            border-radius: 5px;
+            width: 200px;
+            padding: 14px;
+            font-size: 16px;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0px 6px 18px -5px rgba(237, 103, 85, 1);
+        }
+</style>
+@if (popupShown == null)
+{
+    
+    <div class="blur-background"></div>
+
+    <!-- Cookie consent popup -->
+    <div class="cookiesContent" id="cookiePopup">
+        <button class="close" onclick="closePopup()">&times;</button>
+        <img src="https://cdn-icons-png.flaticon.com/512/1047/1047711.png" alt="cookies-img" />
+        <p>This website uses cookies to ensure you get the best experience. Do you accept cookies?</p>
+        <button class="accept" onclick="acceptCookies()">Accept</button>
+    </div>
+}
+@{
+    var cookieOptions = new Microsoft.AspNetCore.Http.CookieOptions
+            {
+                Expires = DateTime.Now.AddDays(30) // Adjust the expiry as needed
+            };
+
+    Context.Response.Cookies.Append("cookiePopupShown", "true", cookieOptions);
+}
+    <script>
+    window.onload = function () {
+        var popupShown = localStorage.getItem('cookiePopupShown');
+        if (!popupShown) {
+            showCookieConfirmation();
+        }
+    };
+
+
+        function showCookieConfirmation() {
+        document.querySelector('.blur-background').style.display = 'block';
+        document.getElementById('cookiePopup').style.display = 'block';
+        }
+
+    function acceptCookies() {
+        setCookie('cookiePopupShown', 'true', 30);
+        hidePopup();
+        removeBlur();
+        window.location.reload(); // Reload the page
+    }
+
+    function closePopup() {
+        setCookie('cookiePopupShown', 'true', 30);
+        hidePopup();
+        removeBlur();
+        window.location.reload(); // Reload the page
+    }
+
+
+        function hidePopup() {
+        document.getElementById('cookiePopup').style.display = 'none';
+        }
+
+        function setCookie(name, value, days) {
+        var expires = "";
+        if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (value || "") + expires + "; path=/";
+        }
+
+        function removeBlur() {
+        document.querySelector('.blur-background').style.display = 'none';
+        }
+
+        function getCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+        }
+    </script>

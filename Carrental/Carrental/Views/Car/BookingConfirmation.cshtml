@@ -1,0 +1,287 @@
+﻿@model Carrental.Models.BookingConfirmationViewModel
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmation</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+    <style>
+        body {
+            color: #fff; /* White text */
+        }
+
+        .card {
+            border: none;
+            background: linear-gradient(45deg, #ffffff, whitesmoke);
+            color: black;
+            box-shadow: 0 0 15px 0px rgb(0 0 0 / 20%);
+            transition: box-shadow 0.3s ease;
+            border-radius: 20px;
+            max-width: 50rem;
+            margin: auto;
+        }
+
+            .card:hover {
+                box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+            }
+
+
+        .order-status {
+            text-align: center;
+            max-width: 600px;
+            margin: 10px auto;
+            border: 1px solid #eee;
+            font-family: "Arial";
+            background: navajowhite;
+            border-radius: 30px;
+        }
+
+            .order-status .top-part {
+                border-bottom: 1px solid #eee;
+                border-radius: inherit;
+            }
+
+                .order-status .top-part i {
+                    font-size: 50px;
+                    padding-top: 15px;
+                }
+
+            .order-status.order-success .top-part {
+                color: #2ca954;
+            }
+
+            .order-status.order-error .top-part {
+                color: #ff0000;
+            }
+
+            .order-status .top-part small {
+                font-size: 14px;
+                font-weight: normal;
+                display: block;
+                color: #000;
+                background: antiquewhite;
+                padding: 20px 40px;
+                border-radius: inherit;
+            }
+
+            .order-status .top-part h3 span {
+                display: block;
+                margin-top: 5px;
+                color: #000;
+                font-size: 16px;
+                font-weight: normal;
+            }
+
+        .map-container {
+            position: relative;
+            overflow: hidden;
+            max-width: 20rem;
+        }
+
+        .map-image {
+            width: 100%;
+            border-radius: 10px;
+            transition: transform 0.5s ease;
+        }
+
+        .map-container:hover .map-image {
+            transform: scale(1.1);
+        }
+
+        .btn-confirm {
+            font-size: 1.5rem;
+            padding: 15px 30px;
+            background-color: #00ff00; /* Neon green */
+            border: none;
+            border-radius: 10px;
+            color: #000; /* Black text */
+            transition: background-color 0.3s ease;
+        }
+
+            .btn-confirm:hover {
+                background-color: #00cc00; /* Darker neon green */
+            }
+
+        .confirmation-title {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #fff; /* White text */
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3); /* Glowing effect */
+        }
+
+        .card-body {
+            padding: 30px;
+            max-width: 100%;
+        }
+
+        .card-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #fff; /* White text */
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3); /* Glowing effect */
+            color: black;
+        }
+
+        .card-header:first-child {
+            background-color: coral;
+            border-radius: 20px 20px 0px 0;
+        }
+
+        .card-text {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: #fff; /* White text */
+        }
+
+        .Holder {
+            display: flex;
+            align-items: center;
+            align-content: center;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+        }
+        .infoPay {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .infoPay p strong {
+            font-weight: bolder;
+            color: brown;
+        }
+
+        .d-grid {
+            margin-top: 20px;
+        }
+
+            .d-grid a {
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                font-size: 16px;
+                font-weight: bold;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+
+                .d-grid a.history {
+                    background-color: #007bff;
+                    color: #fff;
+                }
+
+                .d-grid a.GoBack {
+                    background-color: #6c757d;
+                    color: #fff;
+                }
+
+                .d-grid a:hover {
+                    background-color: #0056b3;
+                }
+
+                .d-grid a.GoBack:hover {
+                    background-color: #5a6268;
+                }
+
+
+    </style>
+</head>
+
+<body>
+    <div class="container my-5">
+        <div class="card text-center bg-dark">
+            <div class="card-header confirmation-title">Booking Confirmation</div>
+            <div class="card-body">
+                @if (Model.Status== "Completed")
+                {
+                    <div class="order-status order-success">
+                        <div class="top-part">
+                            <i class="far fa-check-circle"></i>
+                            <h3>
+                                Payment Successful
+                                <span>Order #: @Model.TransactionId</span>
+                            </h3>
+                            <small>
+                                Thank you very much and reserving this vehicle one of our sales representative will be in touch shortly. Your reserved details are below
+                            </small>
+                            
+                        </div>
+                    </div>
+
+                    @if (Model.IsForSale)
+                    {
+                        <h5 class="card-title">Congratulations! Your purchase is complete.</h5>
+                    }
+                    else
+                    {
+                        <h5 class="card-title">Booking completed successfully!</h5>
+                    }
+                }
+                else
+                {
+                    <div class="order-status order-error">
+                        <div class="top-part">
+                            <i class="far fa-times-circle"></i>
+                            <h3>
+                                Payment Failed
+                                <span>Order #: @Model.TransactionId</span>
+                            </h3>
+                        </div>
+                    </div>
+
+                    @if (Model.IsForSale)
+                    {
+                        <h5 class="card-title">Purchase Failed</h5>
+                    }
+                    else
+                    {
+                        <h5 class="card-title">Booking Failed</h5>
+                    }
+                }
+
+                <p class="card-text fw-light">
+                    @if (Model.IsForSale)
+                    {
+                    <p> Your @Model.CarMake @Model.CarModel is now yours! Explore and claim your prize using the map below.</p>
+                    <div class="map-container">
+                        <img src="~/img/megatenagia-map-image.png" alt="Map Image" class="map-image">
+                    </div>
+                    }
+                    else
+                    {
+                    <p>Your car rental is booked. Enjoy your journey!</p>
+                    <div class="Holder">
+                    <div class="infoPay">
+						<p><strong>Payee Name:</strong> @Model.PayeeName</p>
+						<p><strong>Car Make:</strong> @Model.CarMake</p>
+						<p><strong>Car Model:</strong> @Model.CarModel</p>
+						<p><strong>Payment Amount:</strong> Br. @Model.PaymentAmount</p>
+						<p><strong>Payment Date:</strong> @Model.PaymentDate.ToString("yyyy-MM-dd HH:mm:ss")</p>
+						<p><strong>Status:</strong> @Model.Status</p>
+                    </div>
+                        <div class="map-container">
+                            <img src="~/img/megatenagia-map-image.png" alt="Map Image" class="map-image">
+                        </div>
+                    </div>
+
+                    }
+                </p>
+
+
+                <div class="d-grid gap-2">
+                    <a href="@Url.Action("Settings", "Account")" class="btn history">History</a>
+                    <a href="@Url.Action("Index", "Car")" class="btn GoBack">Find More Cars</a>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe1m+QVFzWL4gWr1lckUqVHGEqr7E54Q/j1z7nJ3WpIezXrCr+vWWm" crossorigin="anonymous"></script>
+</body>
+
+</html>
