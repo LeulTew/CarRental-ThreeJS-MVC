@@ -10,7 +10,7 @@ Fast, full‑stack car rental platform with an interactive Three.js landing (no 
 
 <br />
 
-![Build](https://github.com/LeulTew/CarRental-5.0-ThreeJS-MVC/actions/workflows/dotnet.yml/badge.svg)
+![Build](https://github.com/LeulTew/CarRental-ThreeJS-MVC/actions/workflows/dotnet.yml/badge.svg)
 ![.NET](https://img.shields.io/badge/.NET-6.0-512BD4?logo=dotnet&logoColor=white)
 ![ASP.NET Identity](https://img.shields.io/badge/Auth-ASP.NET%20Identity-512BD4)
 ![EF Core](https://img.shields.io/badge/EF%20Core-SqlServer-512BD4)
@@ -57,11 +57,7 @@ Key paths for quick orientation:
 
 Inline demo (HTML5 video):
 
-<video src="docs/assets/Carrentaldemo.mp4" controls playsinline width="900" poster="docs/assets/LandingPage.png">
-	Sorry, your browser doesn't support embedded videos. You can
-	<a href="docs/assets/Carrentaldemo.mp4">download the demo MP4</a> instead.
-  
-</video>
+[🎥 View Interactive Demo Video](https://leultew.github.io/CarRental-ThreeJS-MVC/)
 
 Placeholders (add your screenshots in `docs/screens/` and update paths):
 - Landing: `docs/screens/landing.png`
