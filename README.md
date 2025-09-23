@@ -6,6 +6,7 @@ Fast, full‑stack car rental platform with an interactive Three.js landing (no 
 
 <br />
 
+![Build](https://github.com/LeulTew/CarRental-5.0-ThreeJS-MVC/actions/workflows/dotnet.yml/badge.svg)
 ![.NET](https://img.shields.io/badge/.NET-6.0-512BD4?logo=dotnet&logoColor=white)
 ![ASP.NET Identity](https://img.shields.io/badge/Auth-ASP.NET%20Identity-512BD4)
 ![EF Core](https://img.shields.io/badge/EF%20Core-SqlServer-512BD4)
