@@ -1,0 +1,365 @@
+﻿
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+form#roleForm {
+    display: flex;
+    flex-direction: column;
+    height: 690px;
+    /* margin: 30px auto; */
+    /* padding: 20px; */
+    align-items: center;
+    justify-content: space-evenly;
+}
+/* Modern and elegant styles for the Role Update page */
+.update-role-title {
+    color: #ffffff;
+    background-color: #161d30;
+    padding: 20px;
+    text-align: center;
+    border-radius: 15px;
+}
+
+.update-role-description {
+    font-size: 18px;
+    background-color: #161d30;
+    color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transform: perspective(1000px) rotateX(5deg);
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+
+.btn-secondary {
+    position: relative;
+    padding: 15px 25px;
+    border: unset;
+    border-radius: 15px;
+    color: #161d30;
+    z-index: 2;
+    background: #e8e8e8;
+    font-weight: 1000;
+    font-size: 17px;
+    -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+    box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+    transition: all 250ms;
+    overflow: hidden;
+}
+    .btn-secondary::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 0;
+        border-radius: 15px;
+        background-color: #161d30;
+        z-index: -1;
+        -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+        box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+        transition: all 250ms
+    }
+
+    .btn-secondary:hover {
+        color: #e8e8e8;
+    }
+        .btn-secondary:hover::before {
+            width: 100%;
+        }
+
+.box {
+    width: 140px;
+    height: auto;
+    float: left;
+    transition: .5s linear;
+    position: relative;
+    display: block;
+    overflow: hidden;
+    padding: 15px;
+    text-align: center;
+    margin: 0 5px;
+    background: transparent;
+    text-transform: uppercase;
+    font-weight: 900;
+}
+
+    .box:before {
+        position: absolute;
+        content: '';
+        left: 0;
+        bottom: 0;
+        height: 4px;
+        width: 100%;
+        border-bottom: 4px solid transparent;
+        border-left: 4px solid transparent;
+        box-sizing: border-box;
+        transform: translateX(100%);
+    }
+
+    .box:after {
+        position: absolute;
+        content: '';
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        border-top: 4px solid transparent;
+        border-right: 4px solid transparent;
+        box-sizing: border-box;
+        transform: translateX(-100%);
+    }
+
+    .box:hover {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    }
+
+        .box:hover:before {
+            border-color: #262626;
+            height: 100%;
+            transform: translateX(0);
+            transition: .3s transform linear, .3s height linear .3s;
+        }
+
+        .box:hover:after {
+            border-color: #262626;
+
+            height: 100%;
+            transform: translateX(0);
+            transition: .3s transform linear, .3s height linear .5s;
+        }
+.btn-update {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+    outline: none;
+    border: 1px dashed;
+    border-radius: 10px;
+    border-color: #db3f19;
+    --border-radius: 5%;
+    background: transparent;
+}
+
+
+#checklist {
+    --background: aliceblue;
+    --text: #414856;
+    --check: #4f29f0;
+    --disabled: #c3c8de;
+    --width: 200px;
+    --height: 420px;
+    --border-radius: 15px;
+    background: var(--background);
+    overflow: auto;
+    min-width: var(--width);
+    height: var(--height);
+    border-radius: var(--border-radius);
+    position: relative;
+    box-shadow: 0 10px 30px rgba(65, 72, 86, 0.05);
+    padding: 30px 85px;
+    display: grid;
+    grid-template-columns: 30px auto;
+    align-items: center;
+    justify-content: center;
+}
+
+input[type="checkbox"], input[type="checkbox"] label {
+    margin: 15px auto !important;
+    width: 100% !important;
+}
+    #checklist label {
+        color: var(--text);
+        color: #161d30;
+        position: relative;
+        cursor: pointer;
+        display: grid;
+        align-items: center;
+        width: fit-content;
+        transition: color 0.3s ease;
+        font-size: 1.5em;
+        margin-right: 20px;
+    }
+
+        #checklist label::before, #checklist label::after {
+            content: "";
+            position: absolute;
+        }
+
+        #checklist label::before {
+            height: 2px;
+            width: 8px;
+            left: -27px;
+            background: var(--check);
+            border-radius: 2px;
+            transition: background 0.3s ease;
+        }
+
+        #checklist label:after {
+            height: 4px;
+            width: 4px;
+            top: 8px;
+            left: -25px;
+            border-radius: 50%;
+        }
+
+    #checklist input[type="checkbox"] {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        position: relative;
+        height: 20px;
+        width: 20px;
+        outline: none;
+        border: 0;
+        margin: 0 15px 0 0;
+        cursor: pointer;
+        background: var(--background);
+        display: grid;
+        align-items: center;
+        margin-right: 20px;
+        transform: scale(1.5);
+    }
+
+        #checklist input[type="checkbox"]::before, #checklist input[type="checkbox"]::after {
+            content: "";
+            position: absolute;
+            height: 2px;
+            top: auto;
+            background: var(--check);
+            border-radius: 2px;
+        }
+
+        #checklist input[type="checkbox"]::before {
+            width: 0px;
+            right: 60%;
+            transform-origin: right bottom;
+        }
+
+        #checklist input[type="checkbox"]::after {
+            width: 0px;
+            left: 40%;
+            transform-origin: left bottom;
+        }
+
+        #checklist input[type="checkbox"]:checked::before {
+            animation: check-01 0.4s ease forwards;
+        }
+
+        #checklist input[type="checkbox"]:checked::after {
+            animation: check-02 0.4s ease forwards;
+        }
+
+        #checklist input[type="checkbox"]:checked + label {
+            color: var(--disabled);
+            animation: move 0.3s ease 0.1s forwards;
+        }
+
+            #checklist input[type="checkbox"]:checked + label::before {
+                background: var(--disabled);
+                animation: slice 0.4s ease forwards;
+            }
+
+            #checklist input[type="checkbox"]:checked + label::after {
+                animation: firework 0.5s ease forwards 0.1s;
+            }
+
+@keyframes move {
+    50% {
+        padding-left: 8px;
+        padding-right: 0px;
+    }
+
+    100% {
+        padding-right: 4px;
+    }
+}
+
+@keyframes slice {
+    60% {
+        width: 100%;
+        left: 4px;
+    }
+
+    100% {
+        width: 100%;
+        left: -2px;
+        padding-left: 0;
+    }
+}
+
+@keyframes check-01 {
+    0% {
+        width: 4px;
+        top: auto;
+        transform: rotate(0);
+    }
+
+    50% {
+        width: 0px;
+        top: auto;
+        transform: rotate(0);
+    }
+
+    51% {
+        width: 0px;
+        top: 8px;
+        transform: rotate(45deg);
+    }
+
+    100% {
+        width: 5px;
+        top: 8px;
+        transform: rotate(45deg);
+    }
+}
+
+@keyframes check-02 {
+    0% {
+        width: 4px;
+        top: auto;
+        transform: rotate(0);
+    }
+
+    50% {
+        width: 0px;
+        top: auto;
+        transform: rotate(0);
+    }
+
+    51% {
+        width: 0px;
+        top: 8px;
+        transform: rotate(-45deg);
+    }
+
+    100% {
+        width: 10px;
+        top: 8px;
+        transform: rotate(-45deg);
+    }
+}
+
+@keyframes firework {
+    0% {
+        opacity: 1;
+        box-shadow: 0 0 0 -2px #4f29f0, 0 0 0 -2px #4f29f0, 0 0 0 -2px #4f29f0, 0 0 0 -2px #4f29f0, 0 0 0 -2px #4f29f0, 0 0 0 -2px #4f29f0;
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        box-shadow: 0 -15px 0 0px #4f29f0, 14px -8px 0 0px #4f29f0, 14px 8px 0 0px #4f29f0, 0 15px 0 0px #4f29f0, -14px 8px 0 0px #4f29f0, -14px -8px 0 0px #4f29f0;
+    }
+}

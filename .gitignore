@@ -25,28 +25,17 @@ Thumbs.db
 # Node build artifacts in wwwroot (if any)
 **/node_modules/
 **/dist/
+# Client libraries served from wwwroot/lib ship their files in dist/
+!Carrental/Carrental/wwwroot/lib/**/dist/
 
-# Large asset raw sources
+# Large asset raw sources (archived in the v5.0.0-legacy-desktop release)
 Cars/**
 !Cars/.gitattributes
 *.bacpac
+!db/CarR.bacpac
 
 # Avoid redundant nested solution file
 Carrental/Carrental/Carrental.sln
-
-# Keep only one small 3D model folder for showcase
-Carrental/Carrental/wwwroot/car1/
-Carrental/Carrental/wwwroot/car3/
-Carrental/Carrental/wwwroot/car4/
-
-# Ignore generic library folders; we'll add specific files as needed
-Carrental/Carrental/wwwroot/css/
-Carrental/Carrental/wwwroot/js/
-Carrental/Carrental/wwwroot/lib/
-Carrental/Carrental/wwwroot/images/
-Carrental/Carrental/wwwroot/img/
-Carrental/Carrental/wwwroot/Home/public/fonts/
-Carrental/Carrental/wwwroot/Home/public/millennium_falcon/
 
 # Windows alternate data streams copied from zip
 **:Zone.Identifier

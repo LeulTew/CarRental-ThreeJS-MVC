@@ -1,22 +1,29 @@
-# Track common large/binary formats with Git LFS
-*.png filter=lfs diff=lfs merge=lfs -text
-*.jpg filter=lfs diff=lfs merge=lfs -text
-*.jpeg filter=lfs diff=lfs merge=lfs -text
-*.gif filter=lfs diff=lfs merge=lfs -text
-*.webp filter=lfs diff=lfs merge=lfs -text
-*.svg filter=lfs diff=lfs merge=lfs -text
-*.ico filter=lfs diff=lfs merge=lfs -text
+# Binary assets are stored as regular Git blobs (not Git LFS) so GitHub Pages
+# can serve docs/assets and a plain `git clone` gets a runnable app.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.svg -text
 
 # 3D models
-*.glb filter=lfs diff=lfs merge=lfs -text
-*.gltf filter=lfs diff=lfs merge=lfs -text
-*.bin filter=lfs diff=lfs merge=lfs -text
+*.glb binary
+*.bin binary
 
 # Database backups
-*.bacpac filter=lfs diff=lfs merge=lfs -text
-*.bak filter=lfs diff=lfs merge=lfs -text
+*.bacpac binary
+*.bak binary
+
+# Fonts
+*.otf binary
+*.ttf binary
+*.woff binary
+*.woff2 binary
+*.eot binary
 
 # Videos
-*.mp4 filter=lfs diff=lfs merge=lfs -text
-*.mov filter=lfs diff=lfs merge=lfs -text
-*.avi filter=lfs diff=lfs merge=lfs -text
+*.mp4 binary
+*.mov binary
+*.avi binary

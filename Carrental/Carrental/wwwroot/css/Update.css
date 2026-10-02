@@ -1,0 +1,117 @@
+﻿.update-user-container {
+    height: fit-content;
+    background-color: whitesmoke;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #db3f19;
+}
+
+.update-user-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.update-user-back-btn {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    display: block;
+    transition: color 0.3s ease;
+}
+
+    .update-user-back-btn:hover {
+        color: #e74c3c;
+    }
+
+.update-user-validation-summary {
+    color: #e74c3c;
+    margin-bottom: 2rem;
+}
+
+.update-user-form {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0 25px;
+}
+.form-group {
+    /* display: flex; */
+    flex-direction: column;
+    margin-bottom: 12px;
+}
+
+.update-user-label {
+    font-size: 1rem;
+    margin-bottom: 0.2rem;
+}
+
+.update-user-input {
+    width: 100%;
+    padding: 1rem;
+    margin-top: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid #fff;
+    background-color: white;
+    color: black;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+    .update-user-input:focus {
+        border-color: #e74c3c;
+        outline: none;
+    }
+
+.btn-updat {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100px;
+    height: 40px;
+    border: none;
+    padding: 0px 20px;
+    background-color: #211d2f;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: 5px 5px 0px rgba(33, 29, 47, 0.6);
+    transition-duration: .3s;
+    text-decoration: none;
+}
+
+    .btn-updat .svg {
+        width: 13px;
+        position: absolute;
+        right: 0;
+        margin-right: 10px;
+        fill: white;
+        transition-duration: .3s;
+    }
+
+    .btn-updat:hover {
+        color: transparent;
+    }
+
+        .btn-updat:hover .svg {
+            right: 43%;
+            margin: 0;
+            padding: 0;
+            border: none;
+            transition-duration: .3s;
+        }
+
+    .btn-updat:active {
+        transform: translate(2px, 2px);
+        box-shadow: 2px 2px 0px rgb(140, 32, 212);
+        transition-duration: .3s;
+    }
+
+.form-check {
+    color: white;
+}

@@ -1,0 +1,521 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
+
+* {
+    border: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.form-container {
+    z-index: 1;
+    width: 50%;
+    border-radius: 0.75rem;
+    background: transparent;
+    backdrop-filter: blur(10px); /* Adjust the blur intensity as needed */
+    background-color: rgba(92, 91, 91, 0.5);
+    padding: 2rem;
+    color: rgba(243, 244, 246, 1);
+    height: 100%;
+}
+
+.title {
+    font-family: 'Black Ops One', system-ui;
+    padding: 60px;
+    text-align: center;
+    font-size: 3rem;
+    line-height: 2rem;
+    font-weight: 800;
+}
+
+.form {
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.input-group {
+    margin-top: 1.2rem;
+    font-size: 1.2rem;
+    line-height: 1.25rem;
+}
+
+    .input-group label {
+        display: block;
+        color: rgb(246, 247, 249);
+        margin-bottom: 4px;
+    }
+
+    .input-group input {
+        width: 100%;
+        border-radius: 0.375rem;
+        outline: 0;
+        background-color: transparent !important;
+        border-bottom: #fff 1px solid;
+        padding: 0.75rem 1rem;
+        color: rgba(243, 244, 246, 1);
+    }
+
+        .input-group input:focus {
+            border-color: rgba(167, 139, 250);
+        }
+
+    .input-group span {
+        background-color: red;
+        color: white;
+        border-radius: 5px;
+        padding: 5px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        opacity: 0;
+        transform: translateY(0);
+        transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition */
+    }
+
+.input-group:hover span {
+    opacity: 0.7;
+    transform: translateY(0);
+}
+
+/* Animation effect */
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+    20% {
+        transform: translateX(-5px);
+    }
+    40% {
+        transform: translateX(5px);
+    }
+    60% {
+        transform: translateX(-5px);
+    }
+    80% {
+        transform: translateX(5px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/* Apply shake animation to the input group when error is displayed */
+.input-group.error {
+    animation: shake 0.5s;
+}
+
+
+
+.forgot {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    color: rgba(156, 163, 175,1);
+    margin: 8px 0 14px 0;
+}
+
+    .forgot a, .signup a {
+        color: rgba(243, 244, 246, 1);
+        text-decoration: none;
+        font-size: 14px;
+    }
+
+        .forgot a:hover, .signup a:hover {
+            text-decoration: underline rgba(167, 139, 250, 1);
+        }
+
+.sign {
+    display: block;
+    width: 100%;
+    background-color: coral;
+    padding: 1.3rem;
+    text-align: center;
+    color: white;
+    border: none;
+    border-radius: 0.375rem;
+    font-weight: 600;
+    font-size: large;
+    cursor: pointer; /* Indicate interactivity */
+    /* Box-shadow for subtle depth */
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.1), 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* Glossy hover effect with gradient */
+    transition: background-color 0.3s ease-in-out;
+    &:hover
+
+{
+    background-color: #d94018; /* Use your original button color for hover */
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+}
+
+.social-message {
+    display: flex;
+    align-items: center;
+    padding-top: 1rem;
+}
+
+.line {
+    height: 1px;
+    flex: 1 1 0%;
+    background-color: rgba(55, 65, 81, 1);
+}
+
+.social-message .message {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    font-size: 1rem;
+    line-height: 1.25rem;
+    color: rgba(156, 163, 175, 1);
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+}
+
+    .social-icons .icon {
+        border-radius: 0.125rem;
+        padding: 0.75rem;
+        border: none;
+        background-color: transparent;
+        margin-left: 8px;
+    }
+
+        .social-icons .icon svg {
+            height: 1.25rem;
+            width: 1.25rem;
+            fill: #fff;
+        }
+
+.signup {
+    text-align: center;
+    font-size: 1rem;
+    line-height: 1rem;
+    color: rgba(156, 163, 175, 1);
+}
+
+
+
+.login2main {
+    display: flex;
+    transition: transform 0.01s ease;
+    justify-content: space-between;
+    height: 100vh;
+    background: transparent;
+    background-image: url('../img/084910.png');
+    background-size: auto;
+    background-position: center;
+    overflow: hidden;
+}
+
+@keyframes slideRight {
+    0% {
+        transform: translateX(0%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes slideLeft {
+    0% {
+        transform: translateX(0%);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.slide-right {
+    animation: slideRight 1s forwards;
+}
+
+.slide-left {
+    animation: slideLeft 1s forwards;
+}
+
+#lastinput {
+    margin-bottom: 1.2rem;
+}
+
+
+
+.login2main::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.1); /* Adjust the overlay color and transparency as needed */
+    z-index: 0;
+}
+
+.rightside {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 100px 0px 10%;
+    height: 100%;
+    z-index: 1;
+}
+
+.logo {
+    font-size: 2em;
+    font-weight: 400;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+    .logo img {
+        width: 80px; /* Increase the image width for a larger logo */
+    }
+
+    .logo h2 {
+        font-family: 'Black Ops One', system-ui;
+        margin-top: 10px;
+        color: #fff;
+        z-index: 1;
+    }
+
+
+/* Additional styling for h3 and h4 in the rightside div */
+.righttext {
+    font-family: 'Satisfy', cursive;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    right: 100px;
+}
+
+.rightside h2 {
+    margin-top: 10px;
+    font-size: 1.7em;
+    color: #fff; /* Adjust text color */
+}
+
+ul {
+    list-style: none;
+}
+
+.example-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+}
+
+    .example-2 .icon-content {
+        margin: 0 10px;
+        position: relative;
+    }
+
+        .example-2 .icon-content .tooltip {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            padding: 6px 10px;
+            border-radius: 5px;
+            opacity: 0;
+            visibility: hidden;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .example-2 .icon-content:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+            top: -50px;
+        }
+
+        .example-2 .icon-content a {
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            color: #4d4d4d;
+            background-color: #fff;
+            transition: all 0.3s ease-in-out;
+        }
+
+            .example-2 .icon-content a:hover {
+                box-shadow: 3px 2px 45px 0px rgb(0 0 0 / 12%);
+            }
+
+            .example-2 .icon-content a svg {
+                position: relative;
+                z-index: 1;
+                width: 30px;
+                height: 30px;
+            }
+
+            .example-2 .icon-content a:hover {
+                color: white;
+            }
+
+            .example-2 .icon-content a .filled {
+                position: absolute;
+                top: auto;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 0;
+                background-color: #000;
+                transition: all 0.3s ease-in-out;
+            }
+
+            .example-2 .icon-content a:hover .filled {
+                height: 100%;
+            }
+
+            .example-2 .icon-content a[data-social="spotify"] .filled,
+            .example-2 .icon-content a[data-social="spotify"] ~ .tooltip {
+                background-color: #1db954;
+            }
+
+            .example-2 .icon-content a[data-social="pinterest"] .filled,
+            .example-2 .icon-content a[data-social="pinterest"] ~ .tooltip {
+                background-color: #bd081c;
+            }
+
+            .example-2 .icon-content a[data-social="dribbble"] .filled,
+            .example-2 .icon-content a[data-social="dribbble"] ~ .tooltip {
+                background-color: #ea4c89;
+            }
+
+            .example-2 .icon-content a[data-social="telegram"] .filled,
+            .example-2 .icon-content a[data-social="telegram"] ~ .tooltip {
+                background-color: #0088cc;
+            }
+
+
+
+.flex-reverse {
+    flex-direction: row-reverse; /* Change flex direction to reverse */
+}
+
+.morph-animation {
+    animation: morph 0.5s ease;
+}
+
+.forgot-container {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.forgot-password {
+    display: block;
+    text-align: center;
+    color: #4af2a1; /* Neon green color */
+    font-family: 'Roboto', sans-serif; /* Futuristic font */
+    font-size: 1.3rem; /* Larger font size */
+    text-decoration: none; /* Remove underline */
+    margin-top: 2rem; /* Spacing from above elements */
+}
+
+    .forgot-password:hover {
+        color: #2ff79b; /* Lighter shade of green on hover */
+        text-decoration: underline; /* Underline on hover */
+        transform: scale(1.05); /* Slight zoom effect on hover */
+        transition: color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+    }
+
+
+@keyframes morph {
+    0% {
+        flex: 1;
+    }
+
+    100% {
+        flex: 0;
+    }
+}
+
+
+
+/* Add this media query to disable the slide animation for smaller devices */
+@media (max-width: 768px) {
+    .slide-right,
+    .slide-left {
+        animation: none !important;
+    }
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 768px) {
+    .form-container {
+        width: 100%;
+        border-radius: 0;
+        padding: 1.5rem;
+    }
+
+    .title {
+        padding: 50px;
+        font-size: 2rem;
+        line-height: 1.5rem;
+    }
+
+    .form {
+        padding: 0 1rem;
+    }
+
+    .input-group input {
+        padding: 0.5rem 1rem;
+    }
+
+    .logo {
+        font-size: 1.5em;
+        gap: 10px;
+    }
+
+    .rightside {
+        padding: 50px 0 5%;
+    }
+
+    .righttext {
+        right: 0;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .title {
+        margin: 10vh auto 7vh auto;
+        font-size: 2rem;
+        padding: 10px;
+    }
+
+    .form {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .form-container{
+        width: 100%;
+    }
+    /* Adjust other styles as needed for smaller screens */
+    .input-group input {
+        padding: 0.5rem 1rem;
+    }
+
+    .sign {
+        padding: 1rem;
+        font-size: medium;
+    }
+
+
+    /* Hide the right side on smaller screens */
+    #rightside {
+        display: none;
+    }
+}

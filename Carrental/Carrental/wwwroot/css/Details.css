@@ -1,0 +1,1432 @@
+﻿/* Car Details Styling */
+.car-details-section {
+    margin-top: 20px;
+}
+
+.car-details-container {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.car-details-heading {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.car-images-carousel {
+    position: relative;
+}
+
+.carousel-indicators {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+    .carousel-indicators button {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        border: none;
+        background-color: #999;
+    }
+
+.carousel-inner {
+    position: relative;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: none;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+}
+
+.car-details-content {
+    padding: 20px 0;
+}
+
+.car-detail {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.detail-label {
+    font-weight: bold;
+    color: #555;
+}
+
+.detail-value {
+    color: #777;
+}
+
+.car-status-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.car-status-item {
+    margin-bottom: 5px;
+    color: #555;
+}
+
+/* Car Status Styling */
+.car-details {
+    display: flex;
+    gap: 20px;
+    align-items: flex-end;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin: auto;
+}
+.car-status {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.status-heading {
+    font-size: 1.5rem;
+    color: #333;
+    text-align: center;
+    padding-top: 3px;
+    align-self: center;
+}
+
+.status-container {
+
+}
+
+.status-item {
+    padding: 10px 20px;
+    border-radius: 20px;
+    margin: 0 10px;
+    background-color: black;
+    color: aliceblue;
+    height: fit-content;
+}
+
+.status-label {
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.booked {
+    background-image: linear-gradient(to bottom, #0A192F, #0D47A1);
+    background-color: #0A192F;
+    animation: shimmer 1s infinite alternate;
+}
+
+.new {
+    background-image: linear-gradient(to bottom, #FFA500, #FFD700);
+    animation: shimmer 1s infinite alternate;
+}
+
+.for-sale {
+    background-image: linear-gradient(45deg, #00FF00, #00CED1);
+    color: aliceblue;
+    animation: shimmer 1s infinite alternate;
+}
+@keyframes shimmer {
+    0% {
+        background-position: 0% 0%;
+    }
+
+    100% {
+        background-position: 100% 100%;
+    }
+}
+
+/* Specifications Styling */
+.car-specifications {
+    margin-top: 40px;
+    margin-bottom: 3px;
+}
+
+.specifications-heading {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.specifications-content {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
+    text-align: justify;
+}
+
+
+
+
+
+
+
+
+
+
+.booking-form {
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+    .booking-form label {
+        font-weight: bold;
+    }
+
+    .booking-form input[type="date"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+    }
+
+    .booking-form button {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        color: #fff;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .booking-form button:hover {
+            background-color: #0056b3;
+        }
+
+
+
+        /*Buy*/
+@import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:400,700,300);
+
+
+    .carBuy a {
+        text-decoration: none;
+        color: white;
+    }
+
+.carBuy {
+    font-family: "Yanone Kaffeesatz", sans-serif;
+    width: 100%;
+    position: relative;
+    gap: 30px;
+    /* transform: translateY(-50%); */
+    margin: 20px auto;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+    .carBuy .card {
+        min-width: 12rem;
+        max-width: 14rem;
+        text-align: center;
+        position: relative;
+        transition: all 0.2s;
+        cursor: pointer;
+        opacity: 0.7;
+        box-shadow: 0px 17px 46px -10px #777777;
+        height: 100%;
+        min-height: 28rem;
+        border-radius: 14px;
+    }
+
+            .carBuy .card:nth-of-type(1) {
+                -webkit-animation: intro 1s 0.1s forwards;
+                animation: intro 1s 0.1s forwards;
+            }
+
+            .carBuy .card:nth-of-type(2) {
+                -webkit-animation: intro 1s 0.2s forwards;
+                animation: intro 1s 0.2s forwards;
+            }
+
+            .carBuy .card:nth-of-type(3) {
+                -webkit-animation: intro 1s 0.3s forwards;
+                animation: intro 1s 0.3s forwards;
+            }
+
+            .carBuy .card:nth-of-type(1) {
+                background: -webkit-linear-gradient(45deg, #c96881 0%, #f7b695 100%);
+            }
+
+            .carBuy .card:nth-of-type(2) {
+                background: -webkit-linear-gradient(45deg, #6B6ECC 0%, #89BFDF 100%);
+            }
+
+            .carBuy .card:nth-of-type(3) {
+                background: -webkit-linear-gradient(45deg, #81B77B 0%, #A3E3C3 100%);
+            }
+
+            .carBuy .card:hover .card_inner__header img {
+                left: -50px;
+                transition: all 3.4s linear;
+            }
+
+            .carBuy .card:hover .card_inner__cta button {
+                transform: scale(1);
+            }
+
+            .carBuy .card:nth-of-type(1):hover .card_inner__circle img {
+                -webkit-animation: launch 1s forwards;
+                animation: launch 1s forwards;
+            }
+
+            .carBuy .card:nth-of-type(1) .card_inner__circle img {
+                top: 22px;
+                left: 1px;
+            }
+
+            .carBuy .card:nth-of-type(2):hover .card_inner__circle img {
+                -webkit-animation: spin 1s forwards;
+                animation: spin 1s forwards;
+            }
+
+            .carBuy .card:nth-of-type(2) .card_inner__circle img {
+                top: 22px;
+            }
+
+            .carBuy .card:nth-of-type(3):hover .card_inner__circle img {
+                -webkit-animation: fly 1s forwards;
+                animation: fly 1s forwards;
+            }
+
+            .carBuy .card:nth-of-type(3) .card_inner__circle img {
+                top: 22px;
+                left: 1px;
+            }
+
+            .carBuy .card:hover {
+                opacity: 1;
+            }
+
+        .carBuy .card_inner__circle {
+            overflow: hidden;
+            width: 70px;
+            position: absolute;
+            background: #F1F0ED;
+            z-index: 10;
+            height: 70px;
+            border-radius: 100px;
+            left: 0;
+            box-shadow: 0px 7px 20px rgba(0, 0, 0, 0.28);
+            right: 0;
+            margin: auto;
+            border: 4px solid white;
+            top: 82px;
+        }
+
+            .carBuy .card_inner__circle img {
+                height: 26px;
+                position: relative;
+                top: 17px;
+                transition: all 0.2s;
+            }
+
+        .carBuy .card_inner__header {
+            height: 120px;
+            border-top-left-radius: 14px;
+            border-top-right-radius: 14px;
+            overflow: hidden;
+        }
+
+            .carBuy .card_inner__header img {
+                width: 120%;
+                position: relative;
+                top: -30px;
+                left: 0;
+                transition: all 0.1s linear;
+            }
+
+        .carBuy .card_inner__content {
+            padding: 20px;
+        }
+
+            .carBuy .card_inner__content .price {
+                color: white;
+                font-weight: 800;
+                font-size: 1.3rem;
+                text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.42);
+            }
+
+            .carBuy .card_inner__content .text {
+                color: rgba(255, 255, 255, 0.6);
+                font-weight: 100;
+                margin-top: 20px;
+                font-size: 0.8rem;
+                line-height: 16px;
+            }
+
+            .carBuy .card_inner__content .title {
+                font-weight: 800;
+                text-transform: uppercase;
+                color: rgba(255, 255, 255, 0.64);
+                margin-top: 26px;
+                font-size: 1.4rem;
+                letter-spacing: 1px;
+            }
+
+        .carBuy .card_inner__cta {
+            position: absolute;
+            bottom: -24px;
+            left: 0;
+            right: 0;
+            margin: auto;
+            width: 200px;
+        }
+
+            .carBuy .card_inner__cta button {
+                padding: 16px;
+                box-shadow: 0px 0px 40px 4px #F76583, 0px 0px 0px 2px rgba(255, 255, 255, 0.19) inset;
+                width: 100%;
+                background: -webkit-linear-gradient(-90deg, #fe5e7d 0%, #e5375b 100%);
+                border: none;
+                font-family: "Yanone Kaffeesatz", sans-serif;
+                color: white;
+                outline: none;
+                font-size: 20px;
+                border-radius: 6px;
+                transform: scale(0.94);
+                cursor: pointer;
+                transition: box-shadow 0.3s, transform 0.3s 0.1s;
+            }
+
+                .carBuy .card_inner__cta button span {
+                    text-shadow: 0px 4px 18px #BA3F57;
+                }
+
+                .carBuy .card_inner__cta button:hover {
+                    box-shadow: 0px 0px 60px 8px #F76583, 0px 0px 0px 2px rgba(255, 255, 255, 0.19) inset;
+                }
+
+@-webkit-keyframes launch {
+    0% {
+        left: 1px;
+    }
+
+    25% {
+        top: -50px;
+        left: 1px;
+    }
+
+    50% {
+        left: -100px;
+    }
+
+    75% {
+        top: 100px;
+        transform: rotate(40deg);
+    }
+
+    100% {
+        left: 1px;
+    }
+}
+
+@keyframes launch {
+    0% {
+        left: 1px;
+    }
+
+    25% {
+        top: -50px;
+        left: 1px;
+    }
+
+    50% {
+        left: -100px;
+    }
+
+    75% {
+        top: 100px;
+        transform: rotate(40deg);
+    }
+
+    100% {
+        left: 1px;
+    }
+}
+
+@-webkit-keyframes fly {
+    0% {
+        left: 0px;
+    }
+
+    25% {
+        top: -50px;
+        left: 50px;
+    }
+
+    50% {
+        left: -130px;
+    }
+
+    75% {
+        top: 60px;
+    }
+
+    100% {
+        left: 0px;
+    }
+}
+
+@keyframes fly {
+    0% {
+        left: 0px;
+    }
+
+    25% {
+        top: -50px;
+        left: 50px;
+    }
+
+    50% {
+        left: -130px;
+    }
+
+    75% {
+        top: 60px;
+    }
+
+    100% {
+        left: 0px;
+    }
+}
+
+@-webkit-keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(720deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(720deg);
+    }
+}
+
+@-webkit-keyframes intro {
+    0% {
+        transform: scale(0);
+    }
+
+    25% {
+        transform: scale(1.06);
+    }
+
+    50% {
+        transform: scale(0.965);
+    }
+
+    75% {
+        transform: scale(1.02);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes intro {
+    0% {
+        transform: scale(0);
+    }
+
+    25% {
+        transform: scale(1.06);
+    }
+
+    50% {
+        transform: scale(0.965);
+    }
+
+    75% {
+        transform: scale(1.02);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+        /*Rent*/
+.containerRent {
+    box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    margin: 80px auto;
+    border-radius: 15px;
+    height: 100%;
+}
+
+
+.formRent {
+    min-width: 100%;
+}
+    .formRent form {
+        display: flex;
+        gap: 10px;
+        width: 100%;
+        min-height: 100px;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+
+.form-group {
+    padding: 0 20px;
+    min-width: 200px;
+    border-right: solid 1px #9a9da5;
+
+}
+
+    .form-group label {
+        color: #9a9da5;
+    }
+
+    .form-group input {
+        cursor: pointer;
+        border: none;
+        font-size: 20px;
+        width: 160px;
+    }
+
+    .form-group p {
+        display: block;
+        color: #0072BB;
+    }
+.form-proceed {
+    padding: 0px 15px
+}
+
+
+button.learn-more {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    border: 0;
+    vertical-align: middle;
+    text-decoration: none;
+    background: transparent;
+    padding: 0;
+    font-size: inherit;
+    font-family: inherit;
+    min-width: 12rem;
+    height: auto;
+}
+
+    button.learn-more .circle {
+        transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+        position: relative;
+        display: block;
+        margin: 0;
+        width: 3rem;
+        height: 3rem;
+        padding: 10px;
+        background: #282936;
+        border-radius: 1.625rem;
+    }
+
+        button.learn-more .circle .icon {
+            transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            background: #fff;
+        }
+
+            button.learn-more .circle .icon.arrow {
+                transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+                left: 0.625rem;
+                width: 1.125rem;
+                height: 0.125rem;
+                background: none;
+            }
+
+                button.learn-more .circle .icon.arrow::before {
+                    position: absolute;
+                    content: "";
+                    top: -0.29rem;
+                    right: 0.0625rem;
+                    width: 0.625rem;
+                    height: 0.625rem;
+                    border-top: 0.125rem solid #fff;
+                    border-right: 0.125rem solid #fff;
+                    transform: rotate(45deg);
+                }
+
+    button.learn-more .button-text {
+        transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        right: 0;
+        bottom: 0;
+        margin: 0 0 0 1.85rem;
+        color: #282936;
+        font-weight: 700;
+        line-height: 1.6;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    button.learn-more:hover .circle {
+        width: 100%;
+    }
+
+        button.learn-more:hover .circle .icon.arrow {
+            background: #fff;
+            transform: translate(1rem, 0);
+        }
+
+    button.learn-more:hover .button-text {
+        color: #fff;
+    }
+
+
+
+
+/*review*/
+.Reviews {
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* border: 3px solid coral; */
+    border-radius: 22px;
+    gap: 30px;
+    box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    margin: 80px 30px;
+    background-color: aliceblue;
+    border-radius: 15px;
+}
+    .Reviews h4 {
+        font-weight: 900;
+        font-size: 50px;
+    }
+
+.containerRev {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    padding: 0 7%;
+    gap: 30px;
+}
+.cardRev {
+    background-color: rgba(243, 244, 246, 1);
+    padding: 20px;
+    min-width: 270px;
+    max-width: 320px;
+    min-height: 250px;
+    max-height: 300px;
+    border-radius: 20px;
+    box-shadow: 0 20px 30px -20px rgba(5, 5, 5, 0.24);
+    transition: 0.5s ease;
+}
+
+.cardRev:hover{
+    transform: translateZ(10px);
+    transform: translateY(10px);
+}
+
+.headerRev {
+    display: flex;
+    align-items: center;
+    grid-gap: 1rem;
+    gap: 1rem;
+}
+
+    .headerRev .imageR {
+        height: 4rem;
+        width: 4rem;
+        border-radius: 9999px;
+        object-fit: cover;
+        background-color: royalblue;
+    }
+
+.stars {
+    display: flex;
+    justify-content: center;
+    grid-gap: 0.125rem;
+    gap: 0.125rem;
+    color: rgba(34, 197, 94, 1);
+}
+
+    .stars svg {
+        height: 1rem;
+        width: 1rem;
+    }
+
+.cardRev .name {
+    margin-top: 0.25rem;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+    --tw-text-opacity: 1;
+    color: rgba(55, 65, 81, 1);
+}
+
+.cardRev .message {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    margin-top: 1rem;
+    color: rgba(107, 114, 128, 1);
+}
+
+
+.cardReview {
+    margin:80px auto;
+    width: 100%;
+    height: fit-content;
+    background-color: white;
+    box-shadow: 0px 187px 75px rgba(0, 0, 0, 0.01), 0px 105px 63px rgba(0, 0, 0, 0.05), 0px 47px 47px rgba(0, 0, 0, 0.09), 0px 12px 26px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 17px 17px 27px 27px;
+}
+
+.titleCom {
+    width: 100%;
+    height: 50px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    border-bottom: 1px solid #f1f1f1;
+    font-weight: 700;
+    font-size: 23px;
+    color: #47484b;
+}
+
+    .titleCom::after {
+        content: '';
+        width: 8ch;
+        height: 1px;
+        position: absolute;
+        bottom: -1px;
+        background-color: #47484b;
+    }
+
+
+.text-box {
+    width: 100%;
+    height: fit-content;
+    background-color: #f1f1f1;
+    padding: 8px;
+}
+
+    .text-box .box-container {
+        background-color: #ffffff;
+        border-radius: 8px 8px 21px 21px;
+        padding: 8px;
+    }
+
+    .text-box textarea {
+        width: 100%;
+        height: 40px;
+        resize: none;
+        border: 0;
+        border-radius: 6px;
+        padding: 12px 12px 10px 12px;
+        font-size: 13px;
+        outline: none;
+        caret-color: #0a84ff;
+    }
+
+    .text-box .formatting {
+        display: grid;
+        grid-template-columns: auto auto auto auto 1fr;
+        align-items:center;
+    }
+
+        .text-box .formatting button {
+            width: 30px;
+            height: 30px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: transparent;
+            border-radius: 50%;
+            border: 0;
+            outline: none;
+        }
+
+            .text-box .formatting button:hover {
+                background-color: #f1f1f1;
+            }
+
+        .text-box .formatting .send {
+            width: 30px;
+            height: 30px;
+            background-color: #0a84ff;
+            margin: 0 0 0 auto;
+        }
+
+            .text-box .formatting .send:hover {
+                background-color: #026eda;
+            }
+
+
+
+@keyframes ripple {
+    0% {
+        transform: scale(0);
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+}
+
+.rating {
+    padding-left: 15px;
+}
+.rating:not(:checked) > input {
+    position: absolute;
+    appearance: none;
+}
+
+.rating:not(:checked) > label {
+    float: right;
+    cursor: pointer;
+    font-size: 30px;
+    color: #666;
+}
+
+    .rating:not(:checked) > label:before {
+        content: '★';
+    }
+
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+    color: #e58e09;
+}
+
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+    color: #ff9e0b;
+}
+
+.rating > input:checked ~ label {
+    color: #ffa723;
+}
+
+
+
+
+
+/*Fav*/
+
+.containerF {
+    max-width: fit-content;
+    margin: 10px;
+    background-color: rgb(36, 36, 36);
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 14px;
+    padding: 10px 15px 10px 10px;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 10px;
+    box-shadow: rgba(46, 46, 46, 0.2) 0px 8px 24px;
+    color: rgb(255, 255, 255);
+}
+
+#favorite {
+ display: none;
+}
+
+
+    #favorite:checked + .containerF svg {
+        fill: hsl(0deg 100% 50%);
+        stroke: hsl(0deg 100% 50%);
+        animation: heartButton 1s;
+    }
+
+@keyframes heartButton {
+    0% {
+        transform: scale(1);
+    }
+
+    25% {
+        transform: scale(1.3);
+    }
+
+    50% {
+        transform: scale(1);
+    }
+
+    75% {
+        transform: scale(1.3);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+#favorite + .containerF .action {
+    position: relative;
+    overflow: hidden;
+    display: grid;
+}
+
+#favorite + .containerF .action span {
+    grid-column-start: 1;
+    grid-column-end: 1;
+    grid-row-start: 1;
+    grid-row-end: 1;
+    transition: all 0.5s;
+}
+
+#favorite + .containerF .action span.option-1 {
+    transform: translate(0px, 0%);
+    opacity: 1;
+}
+
+#favorite:checked + .containerF .action span.option-1 {
+    transform: translate(0px, -100%);
+    opacity: 0;
+}
+
+#favorite + .containerF .action span.option-2 {
+    transform: translate(0px, 100%);
+    opacity: 0;
+}
+
+#favorite:checked + .containerF .action span.option-2 {
+    transform: translate(0px, 0%);
+    opacity: 1;
+}
+
+
+
+
+/*chat*/
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,600");
+
+.chatbot {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -6px 99px -17px rgba(0, 0, 0, 0.68);
+}
+
+@media screen and (min-width: 640px) {
+    .chatbot {
+        max-width: 420px;
+        right: 80px;
+        top: auto;
+    }
+}
+
+.chatbot.chatbot--closed {
+    top: auto;
+    width: 100%;
+    z-index: 999;
+}
+
+.chatbot__header {
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #292460;
+    height: 54px;
+    padding: 0 20px;
+    width: 100%;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+    .chatbot__header:hover {
+        background-color: #393285;
+    }
+
+    .chatbot__header p {
+        margin-right: 20px;
+    }
+
+.chatbot__close-button {
+    fill: #fff;
+}
+
+    .chatbot__close-button.icon-speech {
+        width: 20px;
+        display: none;
+    }
+
+.chatbot--closed .chatbot__close-button.icon-speech {
+    display: block;
+}
+
+.chatbot__close-button.icon-close {
+    width: 14px;
+}
+
+.chatbot--closed .chatbot__close-button.icon-close {
+    display: none;
+}
+
+.chatbot__message-window {
+    height: calc(100% - (54px + 60px));
+    padding: 40px 20px 20px;
+    background-color: #fff;
+    overflow-x: none;
+    overflow-y: auto;
+}
+
+@media screen and (min-width: 640px) {
+    .chatbot__message-window {
+        height: 380px;
+    }
+}
+
+.chatbot__message-window::-webkit-scrollbar {
+    display: none;
+}
+
+.chatbot--closed .chatbot__message-window {
+    display: none;
+}
+
+.chatbot__messages {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    width: auto;
+}
+
+    .chatbot__messages li {
+        margin-bottom: 20px;
+    }
+
+        .chatbot__messages li.is-ai {
+            display: inline-flex;
+            align-items: flex-start;
+        }
+
+        .chatbot__messages li.is-user {
+            text-align: right;
+            display: inline-flex;
+            align-self: flex-end;
+        }
+
+        .chatbot__messages li .is-ai__profile-picture {
+            margin-right: 8px;
+        }
+
+            .chatbot__messages li .is-ai__profile-picture .icon-avatar {
+                width: 40px;
+                height: 40px;
+                padding-top: 6px;
+            }
+
+.chatbot__message {
+    display: inline-block;
+    padding: 12px 20px;
+    word-break: break-word;
+    margin: 0;
+    border-radius: 6px;
+    letter-spacing: -0.01em;
+    line-height: 1.45;
+    overflow: hidden;
+}
+
+.is-ai .chatbot__message {
+    background-color: #f0f0f0;
+    margin-right: 30px;
+}
+
+.is-user .chatbot__message {
+    background-color: #7ee0d2;
+    margin-left: 30px;
+}
+
+.chatbot__message a {
+    color: #7226e0;
+    word-break: break-all;
+    display: inline-block;
+}
+
+.chatbot__message p:first-child {
+    margin-top: 0;
+}
+
+.chatbot__message p:last-child {
+    margin-bottom: 0;
+}
+
+.chatbot__message button {
+    background-color: #fff;
+    font-weight: 300;
+    border: 2px solid #7226e0;
+    border-radius: 50px;
+    padding: 8px 20px;
+    margin: -8px 10px 18px 0;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+}
+
+    .chatbot__message button:hover {
+        background-color: #f2f2f2;
+    }
+
+    .chatbot__message button:focus {
+        outline: none;
+    }
+
+.chatbot__message img {
+    max-width: 100%;
+}
+
+.chatbot__message .card {
+    background-color: #fff;
+    text-decoration: none;
+    overflow: hidden;
+    border-radius: 6px;
+    color: black;
+    word-break: normal;
+}
+
+    .chatbot__message .card .card-content {
+        padding: 20px;
+    }
+
+    .chatbot__message .card .card-title {
+        margin-top: 0;
+    }
+
+    .chatbot__message .card .card-button {
+        color: #7226e0;
+        text-decoration: underline;
+    }
+
+.animation:last-child {
+    -webkit-animation: fadein 0.25s;
+    animation: fadein 0.25s;
+    -webkit-animation-timing-function: all 200ms cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    animation-timing-function: all 200ms cubic-bezier(0.55, 0.055, 0.675, 0.19);
+}
+
+.chatbot__arrow {
+    width: 0;
+    height: 0;
+    margin-top: 18px;
+}
+
+.chatbot__arrow--right {
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-left: 6px solid #7ee0d2;
+}
+
+.chatbot__arrow--left {
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-right: 6px solid #f0f0f0;
+}
+
+.chatbot__entry {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    padding: 0 20px;
+    border-top: 1px solid #e6eaee;
+    background-color: #fff;
+}
+
+.chatbot--closed .chatbot__entry {
+    display: none;
+}
+
+.chatbot__input {
+    height: 100%;
+    width: 80%;
+    border: 0;
+}
+
+    .chatbot__input:focus {
+        outline: none;
+    }
+
+    .chatbot__input::-webkit-input-placeholder {
+        color: #7f7f7f;
+    }
+
+    .chatbot__input::-moz-placeholder {
+        color: #7f7f7f;
+    }
+
+    .chatbot__input::-ms-input-placeholder {
+        color: #7f7f7f;
+    }
+
+    .chatbot__input::-moz-placeholder {
+        color: #7f7f7f;
+    }
+
+.chatbot__submit {
+    fill: coral;
+    height: 22px;
+    width: 22px;
+    transition: fill 0.2s ease;
+    cursor: pointer;
+}
+
+    .chatbot__submit:hover {
+        fill: #45148c;
+    }
+
+.u-text-highlight {
+    color: #7ee0d2;
+}
+
+.loader {
+    margin-bottom: -2px;
+    text-align: center;
+    opacity: 0.3;
+}
+
+.loader__dot {
+    display: inline-block;
+    vertical-align: middle;
+    width: 6px;
+    height: 6px;
+    margin: 0 1px;
+    background: black;
+    border-radius: 50px;
+    -webkit-animation: loader 0.45s infinite alternate;
+    animation: loader 0.45s infinite alternate;
+}
+
+    .loader__dot:nth-of-type(2) {
+        -webkit-animation-delay: 0.15s;
+        animation-delay: 0.15s;
+    }
+
+    .loader__dot:nth-of-type(3) {
+        -webkit-animation-delay: 0.35s;
+        animation-delay: 0.35s;
+    }
+
+@-webkit-keyframes loader {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes loader {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-5px);
+    }
+}
+
+@-webkit-keyframes fadein {
+    from {
+        opacity: 0;
+        margin-top: 10px;
+        margin-bottom: 0;
+    }
+
+    to {
+        opacity: 1;
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+        margin-top: 10px;
+        margin-bottom: 0;
+    }
+
+    to {
+        opacity: 1;
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
+}
+* {
+    box-sizing: border-box;
+}
+
+
+
+input {
+    font-family: "Open Sans", sans-serif;
+}
+
+strong {
+    font-weight: 600;
+}
+
+.intro {
+    display: block;
+    margin-bottom: 20px;
+}

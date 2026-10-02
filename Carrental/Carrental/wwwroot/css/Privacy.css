@@ -1,0 +1,81 @@
+﻿body {
+    background-image: radial-gradient(rgba(12, 12, 12, 0.171) 2px, transparent 0);
+    background-size: 30px 30px;
+    background-position: -5px -5px;
+}
+.container {
+    font-family: 'Karla', sans-serif;
+    letter-spacing: 1px;
+    font-size: 18px;
+    position: relative;
+    margin: auto;
+    margin-bottom: 0;
+}
+
+main.pb-3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 100%;
+}
+.header-container {
+    background-color: #eeeeee;
+    padding: 20px;
+    width: 40rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+    .header-container h1 {
+        margin: 0;
+    }
+
+.desktopContent {
+    min-width: 50%;
+    /* max-width: 100%; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.wrapper {
+    /* padding: 30px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    width: 50%;
+    margin: auto;
+}
+
+details {
+    margin: 10px;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 0.8px 2.7px rgba(0, 0, 0, 0.07), 0 1.9px 6.4px rgba(0, 0, 0, 0.05), 0 3.6px 12px rgba(0, 0, 0, 0.042), 0 6.5px 21.4px rgba(0, 0, 0, 0.035), 0 12.1px 40.1px rgba(0, 0, 0, 0.028), 0 29px 96px rgba(0, 0, 0, 0.02);
+}
+
+summary {
+    background: #f9f9f9;
+    cursor: pointer;
+    padding: 15px;
+    font-weight: 600;
+}
+
+p {
+    padding: 15px;
+    margin: 0;
+    background: #f2f2f2;
+    letter-spacing: 0.5px;
+    width: 100%;
+}
+
+@media (max-width: 650px) {
+    .header-container {
+        width: 100vw;
+    }
+    .wrapper{
+        width: 100%;
+    }
+}

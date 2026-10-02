@@ -1,0 +1,538 @@
+﻿body {
+    /* Add your background pattern here */
+    background-color: #ffffff;
+    background-image: radial-gradient(rgba(12, 12, 12, 0.171) 2px, transparent 0);
+    background-size: 30px 30px;
+    background-position: -5px -5px;
+}
+.container {
+    width: 100%;
+    height: 100%;
+
+}
+.tab-content {
+    margin: 20px 20px 0 110px;
+    /* padding: 15px; */
+    width: 100%;
+    min-height: 80vh;
+    display: inline-block;
+
+    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
+}
+
+.tab-pane {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    /* margin-left: 90px; */
+}
+
+
+
+    /*Personal*/
+    .tab-pane.tab-pane--1 {
+        display: flex;
+        position: relative;
+        max-width: 601px;
+        max-height: 520px;
+        background-color: #f2f8f9;
+        border-radius: 10px;
+        padding: 2em 1.2em;
+        margin: 15vh auto 0 auto;
+        text-decoration: none;
+        z-index: 0;
+        overflow: hidden;
+        background: linear-gradient(to bottom, #c3e6ec, #a7d1d9);
+        font-family: Arial, Helvetica, sans-serif;
+        justify-content: space-around;
+    }
+
+.small-desc {
+    font-size: 1em;
+    font-weight: 400;
+    line-height: 1.5em;
+    color: #452c2c;
+}
+
+.small-desc {
+    font-size: 1em;
+}
+
+.go-corner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 2em;
+    height: 2em;
+    overflow: hidden;
+    top: 0;
+    right: 0;
+    background: linear-gradient(135deg, #6293c8, #384c6c);
+    border-radius: 0 4px 0 32px;
+}
+
+.go-arrow {
+    margin-top: -4px;
+    margin-right: -4px;
+    color: white;
+    font-family: courier, sans;
+}
+
+.Personalcard {
+    padding: 30px 0 0 40px;
+    color: #262626;
+    width: 100%;
+    font-size: 1.5em;
+    line-height: normal;
+    font-weight: 700;
+    margin-bottom: 0.5em;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+    .Personalcard:before {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        top: -16px;
+        right: -16px;
+        background: linear-gradient(135deg, #364a60, #384c6c);
+        height: 32px;
+        width: 32px;
+        border-radius: 32px;
+        transform: scale(1);
+        transform-origin: 50% 50%;
+        transition: transform 0.35s ease-out;
+    }
+
+    .Personalcard:hover:before {
+        transform: scale(45);
+    }
+
+    .Personalcard:hover .small-desc {
+        transition: all 0.5s ease-out;
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    .Personalcard:hover .card-title {
+        transition: all 0.5s ease-out;
+        color: #ffffff;
+    }
+
+
+
+/*Booking*/
+.tab-pane.tab-pane--2 {
+    margin-top: 20px;
+    padding: 20px;
+    BACKGROUND-COLOR: rgb(255 252 251 / 90%);
+}
+
+.booking-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+}
+
+.booking-item {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    max-height: 100%;
+    min-width: 100%;
+    gap: 30px;
+}
+
+.car-info {
+    flex: 0.4;
+}
+
+.car-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.booking-details {
+    flex: 1;
+    padding-left: 20px;
+}
+
+    .booking-details div {
+        margin-bottom: 10px;
+    }
+
+    .booking-details strong {
+        color: #333;
+    }
+
+
+
+/*Update*/
+button.noselect {
+    width: 100px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    background: red;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+    background: #db3f19;
+}
+
+    button.noselect, button.noselect span {
+        transition: 200ms;
+    }
+
+        button.noselect #text {
+            transform: translateX(10px);
+            color: white;
+            font-weight: bold;
+        }
+
+        button.noselect .icon {
+            position: absolute;
+            border-left: 1px solid #c41b1b;
+            transform: translateX(60px);
+            height: 40px;
+            width: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        button.noselect svg {
+            width: 15px;
+            fill: #eee;
+        }
+
+        button.noselect:hover {
+            background: #ff3636;
+        }
+
+            button.noselect:hover #text {
+                color: transparent;
+            }
+
+            button.noselect:hover .icon {
+                width: 150px;
+                border-left: none;
+                transform: translateX(-30px);
+            }
+
+        button.noselect:focus {
+            outline: none;
+        }
+
+        button.noselect:active .icon svg {
+            transform: scale(0.8);
+        }
+
+.tab-pane.tab-pane--3 {
+    padding: 20px;
+    margin: auto;
+    max-width: 800px;
+    height: fit-content;
+    background-color: white;
+}
+
+.edit-user {
+    margin-bottom: 20px;
+}
+
+.edit-user-form {
+    /* background-color: #f9f9f9; */
+    /* border: 1px solid #ddd; */
+    /* border-radius: 8px; */
+    /* padding: 20px; */
+    /* height: fit-content; */
+}
+
+.delete-user {
+    text-align: center;
+}
+
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 20% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 8px;
+    width: 50%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+/* Modal Styling */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 400px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #555;
+}
+
+/* Confirmation Text Styling */
+.confirmation-text {
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Button Styling */
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.delete-button, .cancel-button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.delete-button {
+    background-color: #ff5252; 
+    color: #fff;
+}
+
+    .delete-button:hover {
+        background-color: #e02d2d; 
+    }
+
+.cancel-button {
+    background-color: #ddd; 
+    color: #333;
+}
+
+    .cancel-button:hover {
+        background-color: #c0c0c0; 
+    }
+
+
+
+
+/* Define custom class names to avoid conflicts */
+.dynamic-container {
+    position: fixed;
+    left: 30px;
+    top: 50vh;
+    display: flex;
+    align-items: flex-start;
+    padding: 2px;
+    border-radius: 9px;
+    flex-direction: column;
+}
+
+.scroller {
+    content: "";
+    width: 15px;
+    height: 135px;
+    opacity: 0.4;
+    background: #888;
+    position: absolute;
+    top: 5px;
+    left: -17px;
+    border: 0.5px solid rgba(0, 0, 0, 0.04);
+    border-radius: 7px;
+}
+
+.Dindicator {
+    content: "";
+    width: 10px;
+    height: 28px;
+    background: #ffa500;
+    position: absolute;
+    top: 8px;
+    left: -15px;
+    z-index: 9;
+    border: 0.5px solid rgba(0, 0, 0, 0.04);
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.12), 0px 3px 1px rgba(0, 0, 0, 0.04);
+    border-radius: 7px;
+    transition: all 0.2s ease-out;
+}
+
+.Dynamictab {
+    width: 130px;
+    height: 28px;
+    position: absolute;
+    z-index: 99;
+    outline: none;
+    opacity: 0;
+}
+
+.Dynamictab_label {
+    width: 200px;
+    height: 50px;
+    position: relative;
+    z-index: 999;
+    display: flex;
+    border: 0;
+    font-size: 1rem;
+    cursor: pointer;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.Dynamictab--1:checked ~ .Dindicator {
+    top: 8px;
+}
+
+.Dynamictab--2:checked ~ .Dindicator {
+    top: calc(28px * 2 + 2px);
+}
+
+.Dynamictab--3:checked ~ .Dindicator {
+    top: calc(26.5px * 4 + 1px);
+}
+h1 {
+    margin: auto;
+    text-align: center;
+}
+
+
+@media (max-width: 850px) {
+    main.pb-3 {
+        position: relative;
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+    }
+
+    .dynamic-container {
+        position: absolute;
+        left: 25vw;
+        right: auto;
+        top: 10vh;
+        margin: auto;
+        display: flex;
+        padding: 2px;
+        border-radius: 9px;
+        flex-direction: column;
+        transform: rotate(90deg);
+    }
+
+    .tab-content {
+        margin: 70px 30px;
+        /* padding: 15px; */
+        width: -webkit-fill-available;
+        min-height: fit-content;
+        display: inline-block;
+        box-shadow: none;
+    }
+
+    .tab-pane.tab-pane--1 {
+        margin: inherit;
+        transform: scale(0.87);
+    }
+
+    .tab-pane.tab-pane--2 {
+        margin-top: 30px;
+    }
+    .booking-list {
+        max-width: 30rem;
+    }
+    .booking-item {
+
+        flex-direction: column;
+    }
+
+    .edit-user-form {
+        padding: 0;
+        height: 475px;
+    }
+    .update-user-title {
+        margin-bottom: 0;
+    }
+
+    .update-user-container {
+        transform: scale(0.8);
+        height: 100%;
+    }
+    .update-user-form {
+        align-items: flex-start;
+    }
+    .car-image img {
+        max-width: 7rem;
+        height: auto;
+        border-radius: 5px;
+    }
+}
+
+@media (max-width: 450px) {
+    .tab-content {
+        margin: 70px 0px;
+        /* padding: 15px; */
+        box-shadow: none;
+    }
+
+    .tab-pane.tab-pane--1 {
+        margin: 0;
+        width: 100%;
+    }
+
+    .tab-pane.tab-pane--3 {
+        padding: 0;
+        margin: 0;
+        width: 100%;
+    }
+}

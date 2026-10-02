@@ -84,46 +84,12 @@ FileExtensionContentTypeProvider provider = new FileExtensionContentTypeProvider
 provider.Mappings[".glb"] = "model/gltf+binary";
 provider.Mappings[".gltf"] = "model/gltf+json";
 
-// Configure static files for car1
+// Serves all of wwwroot (including the car1..car4 GLTF models) with GLTF MIME types.
+// A single provider avoids crashing at startup when a model folder is missing.
 app.UseStaticFiles(new StaticFileOptions
 {
-    FileProvider = new PhysicalFileProvider(
-        Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/car1")),
-    RequestPath = "/car1",
     ContentTypeProvider = provider
 });
-
-// Configure static files for car2
-app.UseStaticFiles(new StaticFileOptions
-{
-    FileProvider = new PhysicalFileProvider(
-        Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/car2")),
-    RequestPath = "/car2",
-    ContentTypeProvider = provider
-});
-
-// Configure static files for car3
-app.UseStaticFiles(new StaticFileOptions
-{
-    FileProvider = new PhysicalFileProvider(
-        Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/car3")),
-    RequestPath = "/car3",
-    ContentTypeProvider = provider
-});
-// Configure static files for car4
-app.UseStaticFiles(new StaticFileOptions
-{
-    FileProvider = new PhysicalFileProvider(
-        Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/car4")),
-    RequestPath = "/car4",
-    ContentTypeProvider = provider
-});
-
-
-app.UseStaticFiles();
-
-
-
 
 app.UseRouting();
 
