@@ -1,0 +1,11 @@
+Model Information:
+* title:	SSC Tuatara Striker
+* source:	https://sketchfab.com/3d-models/ssc-tuatara-striker-fdeb679d382444d4bcb4547752ec88ad
+* author:	kevin (ケビン) (https://sketchfab.com/sohyalebret)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "SSC Tuatara Striker" (https://sketchfab.com/3d-models/ssc-tuatara-striker-fdeb679d382444d4bcb4547752ec88ad) by kevin (ケビン) (https://sketchfab.com/sohyalebret) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
