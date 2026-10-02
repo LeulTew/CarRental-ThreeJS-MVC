@@ -25,7 +25,9 @@ We are documenting the CarRental 5.0 project as we go, toward an A++ README. Thi
 - Sensitive values should come from environment variables/app secrets in production
 
 ## Large assets
-- `.gitattributes` enables Git LFS for images, 3D models, bacpac dumps, and videos
+- `.gitattributes` marks images, 3D models, fonts, bacpac dumps, and videos as binary. They are plain Git blobs (no LFS), so clones run as-is and GitHub Pages can serve `docs/assets`
+- `wwwroot` assets, including all four GLTF models, are committed. Raw design sources (`Cars/`) live in the `v5.0.0-legacy-desktop` release
+- `db/CarR.bacpac` is a sanitized sample database (password `Demo@123` for every account; admin `demoacc2@email.com`)
 - `.gitignore` excludes build outputs and local overrides; `:Zone.Identifier` metadata ignored
 
 ## Open items

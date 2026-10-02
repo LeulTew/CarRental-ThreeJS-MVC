@@ -58,7 +58,7 @@ Carrental/
 - **Landing Page**: `Views/Home/Index.cshtml` + `wwwroot/Home/assets/js/main.js`
 - **3D Assets**: `wwwroot/car1..car4/` (GLTF models)
 - **Payments**: `Services/PaypalServices.cs`
-- **Database**: `Models/CarContext.cs`
+- **Database**: `Models/CarContext.cs` (sample data: `db/CarR.bacpac`)
 
 ---
 
@@ -170,7 +170,7 @@ AppUser ──── Favorite ──── Car ──── CarImage
 | **Payments** | PayPal .NET SDK (Sandbox) |
 | **Email** | SMTP via AuthMessageSenderOptions |
 | **Database** | SQL Server with EF Migrations |
-| **Deployment** | GitHub Actions CI, Git LFS for assets |
+| **Deployment** | GitHub Actions CI |
 | **Other** | Swiper (galleries), Google Cloud Speech API |
 
 ---
@@ -194,10 +194,16 @@ AppUser ──── Favorite ──── Car ──── CarImage
    # Edit appsettings.Development.json with your secrets
    ```
 
-3. **Setup Database**:
-   ```bash
-   dotnet ef database update --project Carrental/Carrental/Carrental.csproj
-   ```
+3. **Setup Database** (pick one):
+   - **Sample data (recommended)**: restore the bundled backup with 39 cars, reviews, and bookings. The database name must match the `MyConnection` connection string (`CarR` by default).
+     ```bash
+     sqlpackage /Action:Import /SourceFile:db/CarR.bacpac /TargetServerName:localhost /TargetDatabaseName:CarR /TargetTrustServerCertificate:True
+     ```
+     All sample accounts use the password `Demo@123`. Sign in as `demoacc2@email.com` for Admin/Manager access. Any other `@email.com` user is a Customer. You can also import through SSMS: *Databases → Import Data-tier Application*.
+   - **Empty schema**:
+     ```bash
+     dotnet ef database update --project Carrental/Carrental/Carrental.csproj
+     ```
 
 4. **Run the App**:
    ```bash
@@ -284,9 +290,13 @@ dotnet ef database update --project Carrental/Carrental/Carrental.csproj
 
 ## 🧹 Repository Hygiene
 
-- **Git LFS**: Tracks large assets (images, GLTF/GLB, videos, .bacpac) to keep repo lean
+- **Assets in Git**: Everything the app needs at runtime is committed as plain Git blobs (no LFS), so a fresh `git clone` runs and GitHub Pages can serve `docs/assets`. That covers `wwwroot/css`, `js`, `lib`, `images`, `img`, and all four GLTF models in `wwwroot/car1..car4`.
+- **Sample database**: `db/CarR.bacpac` is a sanitized export. Real emails, phone numbers, names, and credentials were replaced, and every password was reset to `Demo@123`.
 - **.gitignore**: Excludes build artifacts, secrets, Windows artifacts, and bulk datasets
-- **Ignored Assets**: `Cars/` folder (optional local data)
+- **Ignored Assets**: `Cars/` (raw design sources)
+
+### 📦 Releases
+- [`v5.0.0-legacy-desktop`](https://github.com/LeulTew/CarRental-ThreeJS-MVC/releases/tag/v5.0.0-legacy-desktop): the original Feb–Mar 2024 desktop snapshot. It includes the raw `Cars/` design sources, the pre-cleanup code (credentials redacted), and the older Feb-2024 database export.
 
 ---
 
@@ -296,7 +306,7 @@ This project demonstrates enterprise-level skills:
 - **Full-Stack Mastery**: ASP.NET MVC with EF Core, Three.js integration, payment processing
 - **Architecture Excellence**: Repository pattern, clean domain models, precise mappings
 - **Security Best Practices**: Config binding, env vars, OAuth integration
-- **Performance Optimization**: CDN usage, LFS for assets, responsive design
+- **Performance Optimization**: CDN usage, responsive design
 - **DevOps Ready**: CI/CD with GitHub Actions, migrations, container-friendly
 
 *Perfect for portfolios—showcases modern web dev from 3D graphics to secure payments!*
